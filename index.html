@@ -1,0 +1,2276 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="pageTitle">Кристина Азаренко — UX/UI-дизайнер</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta id="pageDescription" name="description" content="UX/UI-дизайнер, специализируюсь на B2B и AR/VR-продуктах.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: #111111;
+  --fg: #FDFDFC;
+  --muted: rgba(253,253,252,0.4);
+  --line: rgba(253,253,252,0.1);
+  --bg-card: rgba(253,253,252,0.05);
+  --bg-card-hover: rgba(253,253,252,0.09);
+  --btn-bg: #FDFDFC;
+  --btn-fg: #111111;
+  --shortcut-bg: rgba(17,17,17,0.25);
+  --shortcut-fg: rgba(17,17,17,0.55);
+  --overlay: rgba(0,0,0,0.5);
+
+  --tor: #17233d;
+  --rzd: #3d1414;
+  --sibur: #0e2f2a;
+  --elem: #1e1730;
+  --torweb: #15304d;
+}
+html[data-theme="light"]{
+  --bg: #FDFDFC;
+  --fg: #111111;
+  --muted: rgba(17,17,17,0.4);
+  --line: rgba(17,17,17,0.1);
+  --bg-card: rgba(17,17,17,0.04);
+  --bg-card-hover: rgba(17,17,17,0.07);
+  --btn-bg: #111111;
+  --btn-fg: #FDFDFC;
+  --shortcut-bg: rgba(253,253,252,0.2);
+  --shortcut-fg: rgba(253,253,252,0.65);
+  --overlay: rgba(17,17,17,0.35);
+
+  --tor: #eef1f8;
+  --rzd: #fbeaea;
+  --sibur: #e8f4f1;
+  --elem: #efeaf7;
+  --torweb: #e8f0f8;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Geist', system-ui, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  transition: background .25s ease, color .25s ease;
+}
+a{ color:inherit; text-decoration:none; }
+
+.page{
+  max-width: 1200px;
+  margin: 0 auto;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  gap: 40px;
+  padding: 32px 24px 80px;
+}
+@media (min-width: 1024px){
+  .page{
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 80px;
+    padding: 0 32px;
+  }
+}
+
+/* ---------------- SIDEBAR ---------------- */
+.sidebar{
+  width: 100%;
+  max-width: 380px;
+  display:flex;
+  flex-direction: column;
+  gap: 28px;
+  position: relative;
+}
+@media (min-width: 1024px){
+  .sidebar{
+    width: 300px;
+    max-width: 300px;
+    flex: none;
+    position: sticky;
+    top: 0;
+    padding-top: 32px;
+    align-self: flex-start;
+    height: 100vh;
+    overflow: visible;
+    padding-bottom: 24px;
+    box-sizing: border-box;
+  }
+  .sidebar .info{ transform-origin: 0 0; }
+}
+
+.toolbar-toggles{
+  z-index: 30;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: 8px;
+}
+@media (min-width: 1024px){
+  .toolbar-toggles{ top: 32px; }
+}
+.theme-toggle,
+.lang-toggle{
+  height: 40px;
+  min-width: 40px;
+  border-radius: 10px;
+  border: none;
+  background: var(--bg-card);
+  color: var(--muted);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.theme-toggle:hover,
+.lang-toggle:hover{
+  background: var(--bg-card-hover);
+  color: var(--fg);
+}
+.theme-toggle{
+  width: 40px;
+  font-size: 16px;
+}
+.lang-toggle{
+  padding: 0 14px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.profile-row{
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+.avatar{
+  display:block; width:156px; height:164px; margin:-16px 0 -16px 0; padding:16px; box-sizing:border-box; border:0; background:none; overflow:visible;
+  flex-shrink:0; cursor:pointer; -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation; user-select:none; -webkit-user-select:none;
+}
+.avatar img{
+  width:100%; height:100%; object-fit:contain; object-position:center bottom; display:block;
+  pointer-events:none; transform-origin:50% 90%;
+  transition:transform .4s cubic-bezier(.2,.8,.2,1);
+}
+@media (hover:hover){ .avatar:hover img{ transform:scale(1.06); } }
+.avatar:focus-visible{ outline:2px solid var(--fg); outline-offset:4px; border-radius:12px; }
+
+.info{ display:flex; flex-direction:column; gap: 22px; }
+.label{
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+}
+.name-line{ font-size:22px; line-height:1.2; letter-spacing:-0.02em; font-weight:500; color:var(--fg); margin:0; }
+.bio-text{
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--fg);
+  margin: 0;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+.inline-link{
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity .15s ease;
+}
+.inline-link:hover{ opacity: 0.65; }
+
+.block{ display:flex; flex-direction:column; gap: 10px; }
+
+/* ---------------- ACTION ROWS (CV + contacts) ---------------- */
+.contact-list{ display:flex; flex-direction:column; gap: 8px; }
+.cv-btn,
+.contact-row{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 12px;
+  background: var(--bg-card);
+  color: var(--fg);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+.cv-btn:hover,
+.contact-row:hover{ background: var(--bg-card-hover); }
+.cv-btn:focus-visible,
+.contact-row:focus-visible{ outline: 2px solid var(--fg); outline-offset: -2px; }
+.row-icon{ flex-shrink: 0; color: var(--muted); }
+.row-text{ flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row-arrow{ flex-shrink: 0; margin-left: auto; color: var(--muted); transition: transform .15s ease, color .15s ease; }
+.cv-btn:hover .row-arrow,
+.contact-row:hover .row-arrow{ transform: translate(2px, -2px); color: var(--fg); }
+
+.contact-row--tg{ background: #229ed9; color: #fff; }
+.contact-row--tg:hover{ background: #2fb0ec; }
+.contact-row--tg .row-icon,
+.contact-row--tg .row-arrow{ color: rgba(255,255,255,0.92); }
+.contact-row--tg:hover .row-arrow{ color: #fff; }
+
+
+/* ---------------- CONCEPTS CARD ---------------- */
+:root{ --concept-bg: #0a0a0a; --concept-panel: #1c1c1a; }
+html[data-theme="light"]{ --concept-bg: #e6e6e3; --concept-panel: #f2f2ef; }
+html[data-theme="light"] .concepts__link:hover{ background:#e8e8e4; }
+
+.concepts{
+  position: relative;
+  height: 256px;
+  border-radius: 20px;
+  background: var(--concept-bg);
+  overflow: hidden;
+  isolation: isolate;
+}
+.concepts__stage{ position: absolute; inset: 0; display: block; }
+/* карточка всегда 102 px шириной и строго в пропорции файлов 320 x 470: картинка не растягивается и не обрезается */
+.concept-card{
+  position: absolute;
+  top: 24px;
+  width: 102px;
+  aspect-ratio: 320 / 470;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+  transform-origin: 50% 100%;
+  transition: rotate .55s cubic-bezier(.2,.9,.25,1.15), translate .55s cubic-bezier(.2,.9,.25,1.15);
+  animation: conceptRise .8s cubic-bezier(.2,.9,.25,1) backwards;
+}
+.concept-card--l{ left: calc(50% - 108px); background: #3d6bff; rotate: -8deg; animation-delay: .15s; }
+.concept-card--c{ left: calc(50% - 51px); top: 18px; background: #ffd23f; z-index: 2; animation-delay: .28s; }
+.concept-card--r{ left: calc(50% + 6px); background: #ea4c89; rotate: 8deg; animation-delay: .4s; }
+.concepts:hover .concept-card--l{ rotate: -13deg; translate: -8px -10px; }
+.concepts:hover .concept-card--c{ translate: 0 -12px; }
+.concepts:hover .concept-card--r{ rotate: 13deg; translate: 8px -10px; }
+.concept-card img{ display: block; width: 100%; height: 100%; object-fit: cover; }
+@keyframes conceptRise{
+  from{ transform: translateY(64px); opacity: 0; }
+  to{ transform: none; opacity: 1; }
+}
+.concepts__panel{
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 3;
+  border-radius: 18px;
+  background: var(--concept-panel);
+}
+.concepts__title{
+  padding: 20px 20px 18px;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+.concepts__links{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--line);
+}
+.concepts__link{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px 16px;
+  font-size: 13.5px;
+  color: var(--fg);
+  transition: background .15s ease;
+}
+.concepts__link + .concepts__link{ border-left: 1px solid var(--line); }
+.concepts__link:first-child{ border-bottom-left-radius: 18px; }
+.concepts__link:last-child{ border-bottom-right-radius: 18px; }
+.concepts__link:hover{ background: var(--bg-card); }
+.concepts__link:focus-visible{ outline: 2px solid var(--fg); outline-offset: -3px; }
+.concepts__dot{ width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.concepts__dot--dribbble{ background: #ea4c89; }
+.concepts__dot--pinterest{ background: #e60023; }
+.concepts__arrow{ margin-left: auto; flex-shrink: 0; color: var(--muted); transition: transform .15s ease, color .15s ease; }
+.concepts__link:hover .concepts__arrow{ color: var(--fg); transform: translate(2px, -2px); }
+@media (hover: none){
+  .concepts .concept-card--l{ rotate: -13deg; translate: -8px -10px; }
+  .concepts .concept-card--c{ translate: 0 -12px; }
+  .concepts .concept-card--r{ rotate: 13deg; translate: 8px -10px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .concept-card{ transition: none; animation: none; }
+}
+
+/* ---------------- SHOWCASE ---------------- */
+.showcase{
+  width: 100%;
+  max-width: 560px;
+  display:flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 8px;
+}
+@media (min-width: 1024px){
+  .showcase{ padding-top: 32px; padding-bottom: 60px; }
+}
+
+/* ---------------- SECTION HEADINGS ---------------- */
+.section-heading{
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+}
+
+/* ---------------- EXPERIENCE ---------------- */
+.experience-block{ display:flex; flex-direction:column; }
+.exp-list{ display:flex; flex-direction:column; }
+.exp-item{
+  border-bottom: 1px solid var(--line);
+}
+.exp-list .exp-item:last-child{ border-bottom: none; }
+.exp-toggle{
+  display:flex;
+  align-items:flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 18px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+}
+.exp-list .exp-item:first-child .exp-toggle{ padding-top: 0; }
+.exp-main{
+  display:flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.exp-company-row{
+  display:flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.exp-company{
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--fg);
+}
+.exp-role{
+  font-size: 13px;
+  color: var(--muted);
+}
+.exp-badge{
+  display:inline-flex;
+  align-items:center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #34c759;
+  background: rgba(52,199,89,0.12);
+  padding: 3px 9px 3px 7px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.exp-badge-dot{
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34c759;
+  flex-shrink: 0;
+  margin-right: 2px;
+}
+.exp-right{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.exp-dates{
+  font-size: 12.5px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.exp-chevron{
+  font-size: 13px;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: transform .2s ease;
+  line-height: 1;
+}
+.exp-item.is-open .exp-chevron{ transform: rotate(180deg); }
+.exp-panel{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .25s ease;
+}
+.exp-desc{
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--fg);
+  opacity: 0.8;
+  margin: 0 0 18px;
+}
+
+.cases-block{ display:flex; flex-direction:column; }
+.cases-list{ display:flex; flex-direction:column; gap: 44px; }
+
+.project-card{ width:100%; }
+.project-media-link{
+  display:block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+.project-media{
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: opacity .15s ease;
+}
+.project-media-link:hover .project-media{ opacity: 0.88; }
+.project-video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.placeholder-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 10px;
+}
+.placeholder-badge{
+  font-family: monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(237,237,237,0.55);
+  border: 1px dashed rgba(237,237,237,0.3);
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+html[data-theme="light"] .placeholder-badge{
+  color: rgba(0,0,0,0.4);
+  border-color: rgba(0,0,0,0.2);
+}
+.placeholder-name{
+  font-size: 13px;
+  color: rgba(237,237,237,0.35);
+}
+html[data-theme="light"] .placeholder-name{ color: rgba(0,0,0,0.3); }
+
+.project-info{ margin-top: 18px; }
+.project-title{
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  color: var(--fg);
+}
+.project-title button{
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition: opacity .15s ease;
+}
+.project-title button:hover{ opacity: 0.6; }
+.project-tags{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.project-tag{
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 4px 11px;
+}
+.project-desc{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 640px;
+}
+
+/* ---------------- CONTACT MODAL ---------------- */
+.modal-overlay{
+  position: fixed;
+  inset: 0;
+  background: var(--overlay);
+  backdrop-filter: blur(2px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 24px;
+  z-index: 100;
+}
+.modal-overlay[hidden]{ display:none; }
+.modal-box{
+  width: 100%;
+  max-width: 340px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+}
+.modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: 14px;
+}
+.modal-header span{
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg);
+}
+.modal-close{
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: none;
+  background: var(--bg-card);
+  color: var(--fg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size: 14px;
+  transition: background .15s ease;
+}
+.modal-close:hover{ background: var(--bg-card-hover); }
+.modal-box--project{
+  max-width: 640px;
+  max-height: 82vh;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.modal-box--project .modal-header{
+  margin-bottom: 0;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.modal-box--project .modal-header span{ font-size: 16px; font-weight: 500; }
+
+.pm-body{
+  padding: 20px 24px 28px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+.pm-body:hover,
+.pm-body:focus-within{
+  scrollbar-color: var(--line) transparent;
+}
+.pm-body::-webkit-scrollbar{
+  width: 6px;
+}
+.pm-body::-webkit-scrollbar-track{
+  background: transparent;
+}
+.pm-body::-webkit-scrollbar-thumb{
+  background: transparent;
+  border-radius: 3px;
+}
+.pm-body:hover::-webkit-scrollbar-thumb,
+.pm-body:focus-within::-webkit-scrollbar-thumb{
+  background: var(--line);
+}
+.pm-body .project-tags{ margin: 0 0 22px; }
+.modal-box--project{ max-width: 720px; }
+.pm-body{ padding: 24px 32px 36px; counter-reset: pmsec; }
+@media (max-width: 560px){ .pm-body{ padding: 20px 20px 28px; } }
+
+/* вступление: крупнее основного текста */
+.pm-context{
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--fg);
+  margin: 0 0 26px;
+}
+.pm-context p{ margin: 0 0 12px; }
+.pm-context p:last-child{ margin-bottom: 0; }
+
+/* навигация по разделам: липкие «таблетки» */
+.pm-toc{
+  position: sticky;
+  top: -24px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 -32px 8px;
+  padding: 14px 32px;
+  background: var(--bg-card, var(--bg));
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+@media (max-width: 560px){ .pm-toc{ margin: 0 -20px 8px; padding: 12px 20px; } }
+.pm-toc-link{
+  font-size: 13px;
+  line-height: 1;
+  color: var(--muted);
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--bg-card-hover);
+  white-space: nowrap;
+  transition: color .15s ease, background .15s ease;
+}
+.pm-toc-link:hover{ color: var(--fg); }
+.pm-toc-link.is-active{ color: var(--bg); background: var(--fg); }
+
+/* разделы: номер, заголовок, текст в колонке с комфортной длиной строки */
+.pm-section{
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  column-gap: 28px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 64px;
+  counter-increment: pmsec;
+}
+.pm-section:last-child{ border-bottom: 0; padding-bottom: 0; }
+.pm-heading{
+  grid-column: 1;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--fg);
+  line-height: 1.4;
+}
+.pm-heading::before{
+  content: counter(pmsec, decimal-leading-zero);
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: .02em;
+}
+.pm-section > :not(.pm-heading){ grid-column: 2; }
+@media (max-width: 640px){
+  .pm-section{ grid-template-columns: 1fr; }
+  .pm-heading{ margin-bottom: 12px; }
+  .pm-section > :not(.pm-heading){ grid-column: 1; }
+}
+.pm-text{
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--fg);
+  opacity: 0.85;
+  margin: 0 0 12px;
+}
+.pm-text:last-child{ margin-bottom: 0; }
+.pm-list{
+  margin: 0 0 12px;
+  padding-left: 18px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--fg);
+  opacity: 0.85;
+}
+.pm-list:last-child{ margin-bottom: 0; }
+.pm-list li{ margin-bottom: 6px; }
+.pm-list li:last-child{ margin-bottom: 0; }
+.pm-text strong, .pm-context strong, .pm-list strong{
+  color: var(--fg);
+  opacity: 1;
+  font-weight: 500;
+}
+
+
+/* ---- Project popup: header + stacked labelled sections ---- */
+.modal-box--project{ max-width: 720px; max-height: 80vh; border-radius: 20px; }
+.modal-box--project .modal-header{ align-items: flex-start; gap: 16px; padding: 20px 24px 16px; }
+.m-titlewrap{ min-width: 0; }
+.modal-box--project .modal-header #projectModalTitle{
+  display: block; font-size: 22px; line-height: 1.15;
+  letter-spacing: -0.03em; font-weight: 600;
+}
+.m-meta{ margin-top: 6px; font-size: 14px; line-height: 1.4; color: var(--muted); }
+.modal-box--project .modal-close{ flex: none; width: 36px; height: 36px; border-radius: 999px; font-size: 16px; }
+.modal-box--project .pm-body{ padding: 4px 24px 32px; }
+@media (max-width: 560px){
+  .modal-box--project .modal-header{ padding: 18px 20px 14px; }
+  .modal-box--project .pm-body{ padding: 4px 20px 28px; }
+  .pm-context{ font-size: 15.5px; margin-top: 16px; }
+  .pm-text, .pm-list{ font-size: 14.5px; }
+}
+.pm-context{ font-size: 16px; line-height: 1.55; max-width: 62ch; margin: 20px 0 0; }
+.pm-section{ display: block; padding: 0; margin-top: 28px; border: 0; scroll-margin-top: 0; }
+.pm-section:last-child{ padding-bottom: 0; }
+.pm-heading{
+  margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); line-height: 1.4;
+}
+.pm-heading::before{ display: none; }
+.pm-section > :not(.pm-heading){ grid-column: auto; max-width: 62ch; }
+.pm-text, .pm-list{ font-size: 15px; line-height: 1.6; opacity: 1; margin-bottom: 12px; }
+.pm-text{ color: var(--fg); }
+.pm-list li{ margin-bottom: 8px; }
+ol.pm-list{ list-style: none; padding: 0; counter-reset: pml; }
+ol.pm-list li{ position: relative; padding-left: 36px; counter-increment: pml; }
+ol.pm-list li::before{
+  content: counter(pml, decimal-leading-zero); position: absolute; left: 0; top: 5px;
+  font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums;
+}
+
+
+/* ---- Project popup: facts, task, numbered process, results ---- */
+.pm-facts{ display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 10px 20px; margin: 20px 0 0; padding: 0 0 22px; border-bottom: 1px solid var(--line); font-size: 14px; line-height: 1.5; }
+.pm-facts dt{ color: var(--muted); }
+.pm-facts dd{ margin: 0; color: var(--fg); }
+@media (max-width: 560px){ .pm-facts{ grid-template-columns: 1fr; gap: 2px; } .pm-facts dd{ margin-bottom: 10px; } }
+.pm-task{ margin: 0; font-size: 17px; line-height: 1.5; letter-spacing: -0.01em; color: var(--fg); max-width: 62ch; }
+.pm-steps{ list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px 28px; max-width: none; }
+.pm-steps li{ display: grid; grid-template-columns: 30px minmax(0, 1fr); font-size: 14.5px; line-height: 1.5; }
+.pm-steps .pm-num{ font-size: 12px; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
+.pm-steps b{ display: block; font-weight: 600; color: var(--fg); }
+.pm-steps p{ margin: 3px 0 0; color: var(--muted); }
+.pm-lead{ margin: 0 0 18px; font-size: 16px; line-height: 1.55; color: var(--fg); max-width: 62ch; }
+.pm-results{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 24px; max-width: none; }
+@media (max-width: 560px){ .pm-results{ grid-template-columns: 1fr; } }
+.pm-results div{ padding-top: 14px; border-top: 1px solid var(--line); }
+.pm-results b{ display: block; font-size: 15px; font-weight: 600; color: var(--fg); }
+.pm-results p{ margin: 3px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+.pm-section > .pm-steps, .pm-section > .pm-results{ max-width: none; }
+
+
+/* ---------------- MEME FOLDER ---------------- */
+:root{ --folder-bg: rgba(255,255,255,.16); --folder-ring: rgba(255,255,255,.18); --folder-empty: rgba(255,255,255,.10); }
+html[data-theme="light"]{ --folder-bg: rgba(60,60,67,.14); --folder-ring: rgba(0,0,0,.08); --folder-empty: rgba(60,60,67,.12); }
+.meme-folder{
+  position: fixed; right: 28px; bottom: 22px; z-index: 40;
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  padding: 0; border: 0; background: none; cursor: pointer; font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.ios-folder{
+  position: relative; width: 66px; height: 66px; padding: 7px; border-radius: 19px;
+  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 3.5px;
+  background: var(--folder-bg);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+  box-shadow: inset 0 0 0 1px var(--folder-ring), 0 10px 24px rgba(0,0,0,.22);
+  transition: transform .45s cubic-bezier(.2,.9,.3,1.3);
+}
+.ios-folder img, .ios-folder i{ width: 100%; height: 100%; border-radius: 5.5px; object-fit: cover; display: block; }
+.ios-folder i{ background: var(--folder-empty); }
+.ios-folder__badge{
+  position: absolute; top: -7px; right: -7px; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px;
+  background: #ff3b30; color: #fff; font-size: 12.5px; font-weight: 600; line-height: 22px; text-align: center;
+  box-shadow: 0 0 0 2px var(--bg);
+  animation: badgePop .6s cubic-bezier(.2,.9,.3,1.5) 1.2s backwards;
+}
+.ios-folder__label{ font-size: 12px; color: var(--muted); transition: color .15s ease; }
+.meme-folder:hover .ios-folder__label{ color: var(--fg); }
+@media (hover: hover){ .meme-folder:hover .ios-folder{ transform: scale(1.1) rotate(-3deg); } }
+.meme-folder:active .ios-folder{ transform: scale(.92); transition-duration: .12s; }
+.meme-folder:focus-visible{ outline: 2px solid var(--fg); outline-offset: 6px; border-radius: 22px; }
+@keyframes badgePop{ from{ transform: scale(0); } }
+@media (max-width: 1023px){
+  .meme-folder{ right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+  .meme-folder{ gap: 4px; }
+  .meme-folder .ios-folder__label{ font-size: 11px; }
+  .ios-folder{ width: 54px; height: 54px; padding: 6px; gap: 3px; border-radius: 16px; }
+  .ios-folder__badge{ top: -6px; right: -6px; min-width: 20px; height: 20px; line-height: 20px; font-size: 11.5px; }
+}
+.meme-layer{ position: fixed; inset: 0; z-index: 60; pointer-events: none; }
+.meme-layer[hidden]{ display: none; }
+.meme-card{
+  position: absolute; left: 0; top: 0; display: block; height: auto; border-radius: 14px;
+  box-shadow: 0 14px 34px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.06);
+  pointer-events: auto; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
+  transition: scale .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
+}
+.meme-card.is-drag{ cursor: grabbing; scale: 1.06; box-shadow: 0 22px 48px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.08); transition: box-shadow .25s ease; }
+@media (hover: hover){ .meme-card:not(.is-drag):hover{ scale: 1.04; } }
+.meme-folder.is-open .ios-folder{ transform: scale(.94); }
+.meme-folder.is-open .ios-folder__badge{ transform: scale(0); transition: transform .25s ease; }
+.confetti-canvas{ position: fixed; left: 0; top: 0; z-index: 200; pointer-events: none; }
+@media (prefers-reduced-motion: reduce){ .ios-folder__badge{ animation: none; } .meme-card, .ios-folder{ transition: none; } }
+
+/* ---------------- PROJECT DETAIL PAGE ---------------- */
+.back-link{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 24px;
+  transition: color .15s ease;
+}
+.back-link:hover{ color: var(--fg); }
+.detail-media{
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+.detail-title{
+  font-size: 22px;
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+.detail-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.detail-desc{
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0;
+}
+.detail-note{
+  margin-top: 32px;
+  font-size: 13px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="toolbar-toggles">
+      <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему" data-i18n-attr="themeToggleLabel" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" /></svg></button>
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language" type="button">EN</button>
+    </div>
+
+    <div class="info">
+      <div class="block">
+        <div class="profile-row">
+          <button type="button" class="avatar" id="avatarBtn" aria-label="Сменить фото">
+            <img id="avatarImg" src="avatar-1.webp" alt="Кристина Азаренко" width="340" height="360" draggable="false">
+          </button>
+          <div class="name-line" data-i18n="name">Кристина Азаренко</div>
+        </div>
+        <p class="bio-text" data-i18n="bio1">UX/UI-дизайнер, 4 года опыта</p>
+        <p class="bio-text" data-i18n="bio2">B2B: мобильные, веб и десктопные приложения, AR/VR и сложные интерфейсы.</p>
+      </div>
+
+      <a class="cv-btn" href="Kristina_Azarenko_CV.pdf" target="_blank" rel="noopener">
+        <svg class="row-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/><path d="M9 9h1"/><path d="M9 13h6"/><path d="M9 17h6"/></svg>
+        <span class="row-text" data-i18n="cvButton">Смотреть резюме</span>
+        <svg class="row-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+      </a>
+
+      <div class="block">
+        <p class="label" data-i18n="contactsLabel">Контакты</p>
+        <div class="contact-list">
+          <a class="contact-row" id="emailRow" data-email="krissazarenko@yandex.ru" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=krissazarenko@yandex.ru" target="_blank" rel="noopener">
+            <svg class="row-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"/><path d="M3 7l9 6l9 -6"/></svg>
+            <span class="row-text" aria-live="polite">krissazarenko@yandex.ru</span>
+          </a>
+          <a class="contact-row contact-row--tg" href="https://t.me/gotikamil" target="_blank" rel="noopener">
+            <svg class="row-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 10-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg>
+            <span class="row-text" data-i18n="contactTelegram">Написать в Telegram</span>
+          </a>
+
+        </div>
+      </div>
+
+
+      <div class="block">
+        <div class="concepts">
+          <a class="concepts__stage" href="https://ru.pinterest.com/krissazarenko/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+            <span class="concept-card concept-card--l"><img src="concept-1.webp" alt="" width="320" height="470" loading="lazy"></span>
+            <span class="concept-card concept-card--c"><img src="concept-2.webp" alt="" width="320" height="470" loading="lazy"></span>
+            <span class="concept-card concept-card--r"><img src="concept-3.webp" alt="" width="320" height="470" loading="lazy"></span>
+          </a>
+          <div class="concepts__panel">
+            <div class="concepts__title" data-i18n="conceptsTitle">Мои концепты</div>
+            <div class="concepts__links">
+              <a class="concepts__link" href="https://dribbble.com/AzarenkoKristina" target="_blank" rel="noopener"><span class="concepts__dot concepts__dot--dribbble"></span>Dribbble <svg class="concepts__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg></a>
+              <a class="concepts__link" href="https://ru.pinterest.com/krissazarenko/" target="_blank" rel="noopener"><span class="concepts__dot concepts__dot--pinterest"></span>Pinterest <svg class="concepts__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- SHOWCASE -->
+  <main class="showcase">
+
+    <!-- EXPERIENCE -->
+    <section>
+      <h2 class="section-heading" data-i18n="expHeading">Опыт</h2>
+      <div class="experience-block">
+        <div class="exp-list">
+
+          <div class="exp-item">
+            <button class="exp-toggle" type="button" aria-expanded="false">
+              <div class="exp-main">
+                <div class="exp-company-row">
+                  <span class="exp-company" data-i18n="expCompany1">Nordic IT</span>
+                  <span class="exp-badge" data-i18n="expBadgeCurrent"><span class="exp-badge-dot"></span>Работаю</span>
+                </div>
+                <span class="exp-role" data-i18n="expRole1">UX/UI-дизайнер / Продуктовый дизайнер</span>
+              </div>
+              <div class="exp-right">
+                <span class="exp-dates" data-i18n="expDates1">2023 — н.в.</span>
+                <span class="exp-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></span>
+              </div>
+            </button>
+            <div class="exp-panel">
+              <p class="exp-desc" data-i18n="expDesc1">Проектирую интерфейсы для B2B-платформ, корпоративных веб-сервисов и AR/VR-решений, в том числе для РЖД и СИБУР. Провожу UX-исследования, формирую гипотезы вместе с командой, создаю дизайн-системы и веду дизайн-ревью после разработки.</p>
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <button class="exp-toggle" type="button" aria-expanded="false">
+              <div class="exp-main">
+                <div class="exp-company-row">
+                  <span class="exp-company" data-i18n="expCompany2">OpenPIM</span>
+                </div>
+                <span class="exp-role" data-i18n="expRole2">UX/UI-дизайнер</span>
+              </div>
+              <div class="exp-right">
+                <span class="exp-dates" data-i18n="expDates2">2022 — 2023</span>
+                <span class="exp-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6l6 -6" /></svg></span>
+              </div>
+            </button>
+            <div class="exp-panel">
+              <p class="exp-desc" data-i18n="expDesc2">Первый опыт в UX/UI-дизайне: разрабатывала макеты и концепции интерфейсов в Figma, улучшала UX-сценарии и проводила конкурентный анализ ключевых экранов веб-сервисов компании.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CASES -->
+    <section class="cases-block">
+    <h2 class="section-heading" data-i18n="casesHeading">Кейсы</h2>
+    <div class="cases-list">
+
+    <section class="project-card">
+      <button class="project-media-link" type="button" data-project="tor">
+        <div class="project-media project-media--video" style="background: var(--tor);">
+          <video
+            class="project-video"
+            poster="tor-cover-poster.jpg"
+            autoplay muted loop playsinline preload="metadata">
+            <source src="tor-cover.mp4" type="video/mp4">
+            <source src="tor-cover.webm" type="video/webm">
+          </video>
+        </div>
+      </button>
+      <div class="project-info">
+        <h2 class="project-title"><button type="button" data-project="tor" data-i18n="torTitle">Tor — мобильное приложение</button></h2>
+        <div class="project-tags">
+          <span class="project-tag">Mobile</span>
+          <span class="project-tag">B2B</span>
+          <span class="project-tag">Android</span>
+          <span class="project-tag">iOS</span>
+        </div>
+        <p class="project-desc" data-i18n="torDesc">Переработка корпоративного приложения для работы с почтой и файлами. Упростила навигацию по папкам, переключение модулей и добавила всё, что раньше работало только на десктопе.</p>
+      </div>
+    </section>
+
+    <section class="project-card">
+      <button class="project-media-link" type="button" data-project="torweb">
+        <div class="project-media project-media--video" style="background: var(--torweb);">
+          <video
+            class="project-video"
+            poster="torweb-cover-poster.jpg"
+            autoplay muted loop playsinline preload="metadata">
+            <source src="torweb-cover.mp4" type="video/mp4">
+            <source src="torweb-cover.webm" type="video/webm">
+          </video>
+        </div>
+      </button>
+      <div class="project-info">
+        <h2 class="project-title"><button type="button" data-project="torweb" data-i18n="torwebTitle">Tor — сайт</button></h2>
+        <div class="project-tags">
+          <span class="project-tag">Website</span>
+          <span class="project-tag">UX/UI</span>
+          <span class="project-tag">B2B</span>
+        </div>
+        <p class="project-desc" data-i18n="torwebDesc">Пересобрала корпоративный сайт IT-компании TOR: сократила с 27 до 19 страниц, ввела сегментацию по ролям клиентов и добавила калькулятор стоимости.</p>
+      </div>
+    </section>
+
+    <section class="project-card">
+      <button class="project-media-link" type="button" data-project="rzd">
+        <div class="project-media project-media--video" style="background: var(--rzd);">
+          <video
+            class="project-video"
+            poster="rzd-cover-poster.jpg"
+            autoplay muted loop playsinline preload="metadata">
+            <source src="rzd-cover.mp4" type="video/mp4">
+            <source src="rzd-cover.webm" type="video/webm">
+          </video>
+        </div>
+      </button>
+      <div class="project-info">
+        <h2 class="project-title"><button type="button" data-project="rzd" data-i18n="rzdTitle">РЖД — AR-навигация и CRM</button></h2>
+        <div class="project-tags">
+          <span class="project-tag">AR</span>
+          <span class="project-tag">B2B</span>
+          <span class="project-tag">Android</span>
+          <span class="project-tag">Desktop</span>
+        </div>
+        <p class="project-desc" data-i18n="rzdDesc">Сотрудников на секретных объектах раньше вели за руку. Спроектировала AR-приложение для самостоятельной навигации по маршрутам и десктопную админку для операторов.</p>
+      </div>
+    </section>
+
+    <section class="project-card">
+      <button class="project-media-link" type="button" data-project="sibur">
+        <div class="project-media project-media--video" style="background: var(--sibur);">
+          <video
+            class="project-video"
+            poster="sibur-cover-poster.jpg"
+            autoplay muted loop playsinline preload="metadata">
+            <source src="sibur-cover.mp4" type="video/mp4">
+            <source src="sibur-cover.webm" type="video/webm">
+          </video>
+        </div>
+      </button>
+      <div class="project-info">
+        <h2 class="project-title"><button type="button" data-project="sibur" data-i18n="siburTitle">СИБУР — 3D-тренажёр</button></h2>
+        <div class="project-tags">
+          <span class="project-tag">3D</span>
+          <span class="project-tag">B2B</span>
+          <span class="project-tag">Desktop</span>
+        </div>
+        <p class="project-desc" data-i18n="siburDesc">Первый цифровой инструмент обучения для инженеров СИБУРа. Заменил выезды на объект интерактивным 3D-тренажёром с режимами разреза, анимации аварийных сценариев и изучения компонентов.</p>
+      </div>
+    </section>
+
+    <section class="project-card">
+      <button class="project-media-link" type="button" data-project="elemental">
+        <div class="project-media project-media--video" style="background: var(--elem);">
+          <video
+            class="project-video"
+            poster="elemental-cover-new-poster.jpg"
+            autoplay muted loop playsinline preload="metadata">
+            <source src="elemental-cover-new.mp4" type="video/mp4">
+            <source src="elemental-cover-new.webm" type="video/webm">
+          </video>
+        </div>
+      </button>
+      <div class="project-info">
+        <h2 class="project-title"><button type="button" data-project="elemental" data-i18n="elementalTitle">Elemental Towers — VR-игра</button></h2>
+        <div class="project-tags">
+          <span class="project-tag">VR</span>
+          <span class="project-tag">Game</span>
+        </div>
+        <p class="project-desc" data-i18n="elementalDesc">Командная разработка VR-игры в жанре tower defense с магическими механиками. Отвечала за игровой UI, HUD, магическую книгу для изучения комбинаций.</p>
+      </div>
+    </section>
+
+    </div>
+    </section>
+
+  </main>
+
+</div>
+
+<!-- MEME FOLDER -->
+<button class="meme-folder" id="memeOpen" type="button" aria-haspopup="dialog">
+  <span class="ios-folder" aria-hidden="true">
+    <img src="meme-1.webp" alt=""><img src="meme-2.webp" alt=""><img src="meme-3.webp" alt="">
+    <img src="meme-4.webp" alt=""><img src="meme-5.webp" alt=""><img src="meme-6.webp" alt="">
+    <img src="meme-7.webp" alt=""><img src="meme-8.webp" alt=""><img src="meme-9.webp" alt="">
+    <span class="ios-folder__badge">9</span>
+  </span>
+  <span class="ios-folder__label" data-i18n="memeFolder">Мемы</span>
+</button>
+
+<div class="meme-layer" id="memeLayer" hidden aria-hidden="true">
+  <img class="meme-card" src="meme-1.webp" alt="" draggable="false" data-ar="1">
+  <img class="meme-card" src="meme-2.webp" alt="" draggable="false" data-ar="1">
+  <img class="meme-card" src="meme-3.webp" alt="" draggable="false" data-ar="1.128">
+  <img class="meme-card" src="meme-4.webp" alt="" draggable="false" data-ar="1.194">
+  <img class="meme-card" src="meme-5.webp" alt="" draggable="false" data-ar="0.95">
+  <img class="meme-card" src="meme-6.webp" alt="" draggable="false" data-ar="0.768">
+  <img class="meme-card" src="meme-7.webp" alt="" draggable="false" data-ar="0.789">
+  <img class="meme-card" src="meme-8.webp" alt="" draggable="false" data-ar="0.509">
+  <img class="meme-card" src="meme-9.webp" alt="" draggable="false" data-ar="0.749">
+</div>
+
+<!-- PROJECT MODAL -->
+<div class="modal-overlay" id="projectModal" hidden>
+  <div class="modal-box modal-box--project">
+    <div class="modal-header">
+      <div class="m-titlewrap">
+        <span id="projectModalTitle">Название проекта</span>
+        <div class="m-meta" id="projectModalMeta"></div>
+      </div>
+      <button class="modal-close" id="projectClose" aria-label="Закрыть" data-i18n-attr="closeLabel" type="button">✕</button>
+    </div>
+    <div class="pm-body" id="projectModalBody"></div>
+  </div>
+</div>
+
+<script>
+// ---------------- I18N ----------------
+const TRANSLATIONS = {
+  ru: {
+    pageTitle: 'Кристина Азаренко — UX/UI-дизайнер',
+    pageDescription: 'UX/UI-дизайнер, специализируюсь на B2B и AR/VR-продуктах.',
+    themeToggleLabel: 'Переключить тему',
+    closeLabel: 'Закрыть',
+    memeFolder: 'Мемы',
+    name: 'Кристина Азаренко',
+    bio1: 'UX/UI-дизайнер, 4 года опыта',
+    bio2: 'B2B: мобильные, веб и десктопные приложения, AR/VR и сложные интерфейсы.',
+    cvButton: 'Смотреть резюме',
+    conceptsTitle: 'Мои концепты',
+    casesHeading: 'Кейсы',
+    contactTelegram: 'Написать в Telegram',
+    emailCopied: 'Адрес скопирован',
+    contactsLabel: 'Контакты',
+    expHeading: 'Опыт',
+    expBadgeCurrent: 'Работаю',
+    expCompany1: 'Nordic IT',
+    expRole1: 'UX/UI-дизайнер / Продуктовый дизайнер',
+    expDates1: '2023 — н.в.',
+    expDesc1: 'Проектирую интерфейсы для B2B-платформ, корпоративных веб-сервисов и AR/VR-решений, в том числе для РЖД и СИБУР. Провожу UX-исследования, формирую гипотезы вместе с командой, создаю дизайн-системы и веду дизайн-ревью после разработки.',
+    expCompany2: 'OpenPIM',
+    expRole2: 'UX/UI-дизайнер',
+    expDates2: '2022 — 2023',
+    expDesc2: 'Первый опыт в UX/UI-дизайне: разрабатывала макеты и концепции интерфейсов в Figma, улучшала UX-сценарии и проводила конкурентный анализ ключевых экранов веб-сервисов компании.',
+    torTitle: 'Tor — мобильное приложение',
+    torDesc: 'Переработка корпоративного приложения для работы с почтой и файлами. Упростила навигацию по папкам, переключение модулей и добавила всё, что раньше работало только на десктопе.',
+    rzdTitle: 'РЖД — AR-навигация и CRM',
+    rzdDesc: 'Сотрудников на секретных объектах раньше вели за руку. Спроектировала AR-приложение для самостоятельной навигации по маршрутам и десктопную админку для операторов.',
+    siburTitle: 'СИБУР — 3D-тренажёр',
+    siburDesc: 'Первый цифровой инструмент обучения для инженеров СИБУРа. Заменил выезды на объект интерактивным 3D-тренажёром с режимами разреза, анимации аварийных сценариев и изучения компонентов.',
+    placeholderBadge: 'Заглушка изображения',
+    elementalTitle: 'Elemental Towers — VR-игра',
+    elementalDesc: 'Командная разработка VR-игры в жанре tower defense с магическими механиками. Отвечала за игровой UI, HUD, магическую книгу для изучения комбинаций.',
+    torwebTitle: 'Tor — сайт',
+    torwebDesc: 'Пересобрала корпоративный сайт IT-компании TOR: сократила с 27 до 19 страниц, ввела сегментацию по ролям клиентов и добавила калькулятор стоимости.'
+  },
+  en: {
+    pageTitle: 'Kristina Azarenko — UX/UI Designer',
+    pageDescription: 'UX/UI designer specializing in B2B and AR/VR products.',
+    themeToggleLabel: 'Toggle theme',
+    closeLabel: 'Close',
+    memeFolder: 'Memes',
+    name: 'Kristina Azarenko',
+    bio1: 'UX/UI designer, 4 years of experience',
+    bio2: 'B2B: mobile, web and desktop apps, AR/VR and complex interfaces.',
+    cvButton: 'View resume',
+    conceptsTitle: 'My concepts',
+    casesHeading: 'Cases',
+    contactTelegram: 'Message on Telegram',
+    emailCopied: 'Email copied',
+    contactsLabel: 'Contact',
+    expHeading: 'Experience',
+    expBadgeCurrent: 'Working here',
+    expCompany1: 'Nordic IT',
+    expRole1: 'UX/UI & Product Designer',
+    expDates1: '2023 — present',
+    expDesc1: 'Design interfaces for B2B platforms, corporate web services and AR/VR solutions, including for RZD and SIBUR. Run UX research, shape hypotheses with the team, build design systems and lead design reviews after development.',
+    expCompany2: 'OpenPIM',
+    expRole2: 'UX/UI Designer',
+    expDates2: '2022 — 2023',
+    expDesc2: 'First hands-on UX/UI experience: designed mockups and interface concepts in Figma, improved UX flows and ran competitive analysis of core web screens on the company website.',
+    torTitle: 'Tor — Mobile App',
+    torDesc: 'Redesigned a corporate app for email and file management. Simplified folder navigation and module switching, and brought over everything that used to be desktop-only.',
+    rzdTitle: 'RZD — AR Navigation & CRM',
+    rzdDesc: 'Field staff at secure sites used to be led by hand. Designed an AR app for independent route navigation and a desktop admin panel for operators.',
+    siburTitle: 'SIBUR — 3D Simulator',
+    siburDesc: 'The first digital training tool for SIBUR engineers. Replaced on-site visits with an interactive 3D simulator featuring cutaway views, emergency scenario animations, and component exploration.',
+    placeholderBadge: 'Image placeholder',
+    elementalTitle: 'Elemental Towers — VR Game',
+    elementalDesc: 'Team-built VR tower defense game with magic mechanics. Responsible for the in-game UI, HUD, and the spellbook for learning combinations.',
+    torwebTitle: 'Tor — Website',
+    torwebDesc: 'Rebuilt the corporate website for IT company TOR: cut it from 27 to 19 pages, introduced segmentation by client role, and added a pricing calculator.'
+  }
+};
+
+let currentLocale = 'ru';
+let currentOpenProjectId = null;
+
+function detectInitialLocale(){
+  const nav = (navigator.language || navigator.userLanguage || '').toLowerCase();
+  return nav.indexOf('ru') === 0 ? 'ru' : 'en';
+}
+
+function applyLocale(locale){
+  currentLocale = locale;
+  const dict = TRANSLATIONS[locale];
+  document.documentElement.lang = locale;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(dict[key] !== undefined) el.textContent = dict[key];
+  });
+  document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+    const key = el.getAttribute('data-i18n-attr');
+    if(dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
+  });
+
+  if(dict.pageTitle) document.title = dict.pageTitle;
+  const descTag = document.getElementById('pageDescription');
+  if(descTag && dict.pageDescription) descTag.setAttribute('content', dict.pageDescription);
+
+  const langToggle = document.getElementById('langToggle');
+  if(langToggle){
+    langToggle.textContent = locale === 'ru' ? 'EN' : 'RU';
+    langToggle.setAttribute('aria-label', locale === 'ru' ? 'Switch to English' : 'Переключить на русский');
+  }
+
+  if(currentOpenProjectId){
+    openProjectModal(currentOpenProjectId);
+  }
+  refreshOpenExpPanels();
+}
+
+// ---------------- THEME TOGGLE ----------------
+(function(){
+  const toggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  if(!toggle) return;
+
+  const SUN_ICON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" /></svg>';
+  const MOON_ICON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg>';
+
+  toggle.addEventListener('click', () => {
+    const isLight = root.getAttribute('data-theme') === 'light';
+    root.setAttribute('data-theme', isLight ? 'dark' : 'light');
+    toggle.innerHTML = isLight ? SUN_ICON : MOON_ICON;
+  });
+})();
+
+// ---------------- LANGUAGE TOGGLE ----------------
+(function(){
+  const langToggle = document.getElementById('langToggle');
+  applyLocale(detectInitialLocale());
+  if(!langToggle) return;
+  langToggle.addEventListener('click', () => {
+    applyLocale(currentLocale === 'ru' ? 'en' : 'ru');
+  });
+})();
+
+// ---------------- EXPERIENCE ACCORDION ----------------
+document.querySelectorAll('.exp-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.exp-item');
+    const panel = item.querySelector('.exp-panel');
+    const isOpen = item.classList.contains('is-open');
+    if(isOpen){
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      requestAnimationFrame(() => { panel.style.maxHeight = '0px'; });
+      item.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      item.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+  });
+});
+
+function refreshOpenExpPanels(){
+  document.querySelectorAll('.exp-item.is-open .exp-panel').forEach(panel => {
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+  });
+}
+
+// ---------------- PROJECT MODAL ----------------
+const PROJECTS_I18N = {
+  "ru": {
+    "tor": {
+      "title": "Tor — мобильное приложение",
+      "tags": [
+        "Mobile",
+        "B2B",
+        "Android",
+        "iOS"
+      ],
+      "case": {
+        "labels": {
+          "task": "Задача",
+          "process": "Процесс",
+          "result": "Результат"
+        },
+        "facts": [
+          [
+            "Роль",
+            "Единственный дизайнер на проекте, весь цикл от аудита до прототипа"
+          ],
+          [
+            "Команда",
+            "Аналитик, коллега по работе с клиентами, разработчики"
+          ]
+        ],
+        "task": "В корпоративной системе уже были базовые модули для входящих документов, писем и файлов, на десктопе и в мобильной версии. Пользователи жаловались на неудобный интерфейс и нехватку функций для полноценной работы. Нужно было переработать мобильное приложение и перенести в него то, что раньше работало только на десктопе.",
+        "process": [
+          [
+            "Аудит",
+            "Прошла все сценарии приложения от первого лица, сняла каждый шаг и построила user flow текущей версии, чтобы видеть проблемы в контексте всего пути."
+          ],
+          [
+            "Проблемы",
+            "Вместе с командой по работе с клиентами собрала около 40 пунктов, свела в таблицу (модуль, сценарий, тип проблемы, влияние) и приоритизировала по частоте и силе влияния."
+          ],
+          [
+            "Гипотезы",
+            "Четыре приоритетные группы: папки и модули, создание письма, комментарии, аккаунт и настройки. Из них вывела три гипотезы: дерево папок, bottom sheet для модулей, глобальный поиск с фильтрами."
+          ],
+          [
+            "Конкурентный анализ",
+            "Сравнила шесть продуктов: Яндекс Почта, Gmail, Outlook, Slack, MS Teams, Аспро. Дерево папок и bottom sheet для модулей встречались у большинства и подтвердили гипотезы. Презентация команде ускорила согласование."
+          ],
+          [
+            "Проектирование",
+            "Отклонила боковую панель для папок (свайп конфликтует с системным «назад») и нижний таб-бар для модулей (не масштабируется, у клиентов разный набор модулей). Выбрала дерево в основном списке и bottom sheet."
+          ],
+          [
+            "Доработки",
+            "Переработала создание письма (отложенная отправка, выбор почтовой линии), комментарии (свои и чужие, дата, редактирование, удаление), настройки и аккаунт. Добавила ответы системы, пустые состояния и ошибки."
+          ]
+        ],
+        "lead": "Получилось больше 100 экранов со всеми состояниями интерфейса, работой фильтров, ошибками и ответами системы. Приложение сейчас в разработке.",
+        "results": [
+          [
+            "Меньше кликов",
+            "Настройки: с 4 кликов до 1. Папка третьего уровня: с 3 кликов до 1."
+          ],
+          [
+            "Тёмная тема",
+            "Отдельно проработана тёмная тема."
+          ],
+          [
+            "Передача в разработку",
+            "К экранам подготовлены текстовые описания для разработчиков."
+          ],
+          [
+            "Тестирование",
+            "Внутреннее тестирование прошло позитивно."
+          ]
+        ]
+      }
+    },
+    "rzd": {
+      "title": "РЖД — AR-навигация и CRM",
+      "tags": [
+        "AR",
+        "B2B",
+        "Android",
+        "Desktop"
+      ],
+      "case": {
+        "labels": {
+          "task": "Задача",
+          "process": "Процесс",
+          "result": "Результат"
+        },
+        "facts": [
+          [
+            "Роль",
+            "Структура сценариев, логика CRM, визуал AR-интерфейса"
+          ],
+          [
+            "Команда",
+            "Ведущий разработчик AR, инженер по навигации, продакт-менеджер"
+          ],
+          [
+            "Инструменты",
+            "Figma"
+          ]
+        ],
+        "task": "У РЖД не было цифровой навигации для рабочих: опытные операторы вручную водили новичков по маршруту и показывали точки осмотра и ремонта. Это влияло на эффективность и безопасность. Нужно было создать мобильное приложение с AR-навигацией и CRM, где инженеры и операторы формируют маршруты, управляют задачами и анализируют выполнение.",
+        "process": [
+          [
+            "Дискавери",
+            "Продукта не существовало, поэтому начали с интервью с полевыми сотрудниками, мастерами, операторами и инженерами и обсудили с разработчиками ограничения AR."
+          ],
+          [
+            "Проблемы",
+            "Нет самостоятельности на маршрутах, нет цифрового учёта, сложно обновлять данные на устройствах, а к AR относятся с недоверием как к нестабильной технологии."
+          ],
+          [
+            "Гипотезы",
+            "Сформулировали четыре гипотезы для MVP: медиа-подсказки при сбоях AR, инверсия маршрута, загрузка маршрутов через CRM, медиа-контент в AR."
+          ],
+          [
+            "Сценарии",
+            "Функциональная карта, user flow и логика CRM-системы."
+          ],
+          [
+            "Прототипы",
+            "Интерактивные прототипы в Figma и визуал AR-интерфейса."
+          ],
+          [
+            "Тестирование",
+            "Два цикла: внутри команды и на станции с реальными сотрудниками. После них доработала экран маршрута, добавила fallback-сценарии и индикаторы состояния AR."
+          ]
+        ],
+        "lead": "Решение принято как пилотное направление для внедрения в нескольких регионах.",
+        "results": [
+          [
+            "Подготовка маршрута",
+            "Время сократилось на 40%."
+          ],
+          [
+            "Прохождение маршрута",
+            "Время сократилось на 28%."
+          ],
+          ["Оценка пользователей", "Выросла с 3,8 до 4,5 из 5."]
+        ]
+      }
+    },
+    "sibur": {
+      "title": "СИБУР — 3D-тренажёр",
+      "tags": [
+        "3D",
+        "B2B",
+        "Desktop"
+      ],
+      "case": {
+        "labels": {
+          "task": "Задача",
+          "process": "Процесс",
+          "result": "Результат"
+        },
+        "facts": [
+          [
+            "Роль",
+            "Структура взаимодействия, UX flow, простота интерфейса"
+          ],
+          [
+            "Команда",
+            "3D-дизайнер, Unity-разработчик, продакт-менеджер"
+          ]
+        ],
+        "task": "В СИБУРе не было цифровых инструментов для обучения: инженеры изучали оборудование по бумажным чертежам и презентациям, а новички тратили недели, чтобы разобраться в устройстве систем. Мы предложили 3D-тренажёр, где можно рассматривать оборудование и видеть, как оно работает.",
+        "process": [
+          [
+            "Сессия",
+            "Провели сессию с преподавателями учебного центра и инженерами."
+          ],
+          [
+            "Проблемы",
+            "Устаревший формат обучения (чертежи, PDF, слайды), низкий интерес у молодых специалистов, невозможность визуализировать процессы."
+          ],
+          [
+            "Гипотезы",
+            "Интерактивность (3D-модели, разрезы, анимации) ускорит понимание принципов работы, а минимум интерфейса снизит когнитивную нагрузку даже у новичков. Цель MVP: упростить обучение без сложного UI."
+          ],
+          [
+            "Сценарии",
+            "Структура взаимодействия и UX flow для трёх режимов: стандартный, «в разрезе» и с анимацией."
+          ],
+          [
+            "Итерации",
+            "Несколько итераций с разработкой, чтобы сбалансировать производительность и качество визуализации. Финальный прототип: минимум текста, акцент на действие."
+          ]
+        ],
+        "lead": "Продукт внедрён в систему обучения без дополнительного инструктажа.",
+        "results": [
+          [
+            "Время обучения",
+            "Сократилось на 45%."
+          ],
+          [
+            "Ошибки при освоении",
+            "Снизились на 32%."
+          ],
+          ["Оценка пользователей", "Выросла с 3,9 до 4,6 из 5."]
+        ]
+      }
+    },
+    "elemental": {
+      "title": "Elemental Towers — VR-игра",
+      "tags": [
+        "VR",
+        "Game"
+      ],
+      "case": {
+        "labels": {
+          "task": "Задача",
+          "process": "Процесс",
+          "result": "Результат"
+        },
+        "facts": [
+          [
+            "Роль",
+            "Продуктовый дизайнер: меню и UX-флоу от старта игры до выбора уровня"
+          ],
+          [
+            "Команда",
+            "Геймдизайнер, VR-разработчик, художник интерфейсов"
+          ]
+        ],
+        "task": "Elemental Towers — внутренняя разработка команды, к которой я подключилась как продуктовый дизайнер, чтобы улучшить UX. К моему приходу уже был базовый прототип, но команда столкнулась с типичными VR-проблемами: утомляемость, путаница в интерфейсе и низкая вовлечённость при обучении.",
+        "process": [
+          [
+            "Анализ сессии",
+            "Вместе с командой разобрала сессию игрока от старта до выбора уровня."
+          ],
+          [
+            "Находки",
+            "HUD постоянно перед глазами и утомляет. Обучение длинное и текстовое, его пропускают. Запуск уровня занимает много шагов, и игроки теряют интерес."
+          ],
+          [
+            "Гипотезы",
+            "HUD по кнопке, контекстные подсказки вместо текста, магическая книга с визуальным обучением, выбор биома через интерактивную карту."
+          ],
+          [
+            "Тестирование",
+            "Две итерации альфа-тестирования с метриками времени, ошибок и эмоциональной реакции. После каждой правили сценарии взаимодействия."
+          ],
+          [
+            "Переработка",
+            "Гибкая система подсказок, HUD с управлением жестами и «магическая книга» как визуальное хранилище знаний и механик."
+          ]
+        ],
+        "lead": "После итераций тестирования метрики значительно улучшились.",
+        "results": [
+          [
+            "Обучение",
+            "Время сократилось в 2,5 раза."
+          ],
+          [
+            "Ошибки",
+            "Ошибки взаимодействия снизились на 42%."
+          ],
+          [
+            "Вовлечённость",
+            "Выросла на 27%."
+          ],
+          ["Оценка интерфейса", "4,8 из 5."]
+        ]
+      }
+    },
+    "torweb": {
+      "title": "Tor — сайт",
+      "tags": [
+        "Website",
+        "UX/UI",
+        "B2B"
+      ],
+      "case": {
+        "labels": {
+          "task": "Задача",
+          "process": "Процесс",
+          "result": "Результат"
+        },
+        "facts": [
+          [
+            "Роль",
+            "Старший дизайнер проекта: аудит, структура, позиционирование, задачи на дизайн и тексты, согласование концепции с директором, тестирование"
+          ],
+          [
+            "Команда",
+            "Дизайнер макетов, технический писатель"
+          ],
+          [
+            "Срок",
+            "2 месяца от аудита до релиза, две языковые версии"
+          ],
+          [
+            "Инструменты",
+            "Tilda"
+          ]
+        ],
+        "task": "TOR — IT-компания с 23-летним опытом, 8000+ пользователей и 1500 клиентов в 9 странах. Продукт состоит из платформы TOR ECM, отраслевых модулей для морской логистики и отдельных IT-услуг. Сайт не отражал эту структуру: это был набор страниц, накопленных за годы работы.",
+        "process": [
+          [
+            "Аудит",
+            "Провела ревизию всех 27 страниц, многие дублировали друг друга. Сгруппировала проблемы по трём направлениям: цены и контакты, структура и позиционирование, визуал, тексты и юридическая часть."
+          ],
+          [
+            "Проблемы",
+            "Везде минимальные тарифы без индивидуального расчёта, неактуальные контакты, форма только на странице контактов. Нет концепции платформы и модулей, поддержка на 6 страницах. Дизайн устарел, тексты не оптимизированы под поиск, нет политик и документов для Минцифры."
+          ],
+          [
+            "Конкурентный анализ",
+            "Основной ориентир — Sedna, AI-платформа для судоходства с клиентами уровня Glencore, Chevron и Exxon. Её логика (без цен, только форма обращения) подходит для enterprise-продаж с длинным циклом. У TOR решение чаще принимает один человек, цикл короче, а закрытая цена была одной из проблем. Решили строить сайт от задачи клиента и показывать стоимость."
+          ],
+          [
+            "Сегментация по ролям",
+            "На главной шесть входов: судовладельцы, операторы контейнерного парка, фрахтовые брокеры, брокеры по купле-продаже судов, портовые агенты, менеджеры и операторы судна. У каждой роли свой набор модулей с перекрёстными ссылками. Ниже платформа TOR ECM, затем остальные услуги."
+          ],
+          [
+            "Калькулятор",
+            "Вместо статичных цен: пользователь выбирает план, указывает число сотрудников, получает расчёт и сразу оставляет заявку."
+          ],
+          [
+            "Структура",
+            "Шесть страниц поддержки объединила в одну, остальные разделы пересобрала по той же логике: с 27 до 19 страниц без потери информации."
+          ],
+          [
+            "Контент",
+            "Вместо правки старых текстов поставила задачу на полное ревью: технический писатель написал каждый блок заново, английскую версию подготовили отдельно."
+          ],
+          [
+            "Визуал и право",
+            "Сайт перевели на цветовую схему самой системы. Добавили политики конфиденциальности и cookie, согласия в формах и документы для Минцифры."
+          ]
+        ],
+        "lead": "Сайт сократился с 27 до 19 страниц, поддержка — с 6 страниц до одной, и теперь он соответствует законодательству.",
+        "results": [
+          [
+            "Трафик",
+            "74% прямых заходов, 19% внутренних переходов, 5% из поиска (Яндекс 64%, Google 35%)."
+          ],
+          [
+            "Заявки",
+            "24 заявки за период, конверсия 1,2%."
+          ],
+          [
+            "Продажи",
+            "Отдел продаж отмечает, что работа с лидами упростилась."
+          ]
+        ]
+      }
+    }
+  },
+  "en": {
+    "tor": {
+      "title": "Tor — Mobile App",
+      "tags": [
+        "Mobile",
+        "B2B",
+        "Android",
+        "iOS"
+      ],
+      "case": {
+        "labels": {
+          "task": "Challenge",
+          "process": "Process",
+          "result": "Result"
+        },
+        "facts": [
+          [
+            "Role",
+            "Sole designer on the project, full cycle from audit to prototype"
+          ],
+          [
+            "Team",
+            "Analyst, a colleague who works with clients, developers"
+          ]
+        ],
+        "task": "The company already had a corporate system with core modules for incoming documents, email and files, on desktop and in a mobile version. Users complained about an inconvenient interface and missing features for full-fledged work. The task was to redesign the mobile app and bring over what used to be desktop-only.",
+        "process": [
+          [
+            "Audit",
+            "Walked through every scenario of the app as a user, captured each step and built the user flow of the current version to see problems in the context of the whole path."
+          ],
+          [
+            "Problems",
+            "Together with the client-facing team I collected about 40 items, put them into a table (module, scenario, problem type, impact) and prioritized by frequency and strength of impact."
+          ],
+          [
+            "Hypotheses",
+            "Four priority groups: folders and modules, composing email, comments, account and settings. They gave three hypotheses: a folder tree, a bottom sheet for modules, global search with filters."
+          ],
+          [
+            "Competitor analysis",
+            "Compared six products: Yandex Mail, Gmail, Outlook, Slack, MS Teams, Aspro. A folder tree and a bottom sheet for modules showed up in most of them and confirmed the hypotheses. Presenting it to the team sped up approval."
+          ],
+          [
+            "Design",
+            "Rejected a side panel for folders (swipe conflicts with the system back gesture) and a bottom tab bar for modules (does not scale, clients have different sets of modules). Chose a tree inside the main list and a bottom sheet."
+          ],
+          [
+            "Refinements",
+            "Reworked composing email (delayed sending, sender mailbox choice), comments (own vs. others, date, edit, delete), settings and account. Added system responses, empty states and errors."
+          ]
+        ],
+        "lead": "The result is over 100 screens covering every interface state, filters, errors and system responses. The app is currently in development.",
+        "results": [
+          [
+            "Fewer taps",
+            "Settings: from 4 taps to 1. A level-3 folder: from 3 taps to 1."
+          ],
+          [
+            "Dark theme",
+            "Dark theme designed separately."
+          ],
+          [
+            "Developer handoff",
+            "Text descriptions prepared for the screens."
+          ],
+          [
+            "Testing",
+            "Internal testing went well."
+          ]
+        ]
+      }
+    },
+    "rzd": {
+      "title": "RZD — AR Navigation & CRM",
+      "tags": [
+        "AR",
+        "B2B",
+        "Android",
+        "Desktop"
+      ],
+      "case": {
+        "labels": {
+          "task": "Challenge",
+          "process": "Process",
+          "result": "Result"
+        },
+        "facts": [
+          [
+            "Role",
+            "User flow structure, CRM logic, AR interface visuals"
+          ],
+          [
+            "Team",
+            "Lead AR developer, navigation engineer, product manager"
+          ],
+          [
+            "Tools",
+            "Figma"
+          ]
+        ],
+        "task": "RZD had no digital navigation for field workers: experienced operators walked newcomers through the route by hand, pointing out inspection and repair points. This affected efficiency and safety. The task was to build a mobile app with AR navigation and a CRM where engineers and operators plan routes, manage tasks and analyze completion.",
+        "process": [
+          [
+            "Discovery",
+            "The product did not exist, so we started with interviews with field workers, foremen, operators and engineers, and discussed AR constraints with developers."
+          ],
+          [
+            "Problems",
+            "No autonomy on routes, no digital route tracking, hard to update data on devices, and distrust of AR as an unstable technology."
+          ],
+          [
+            "Hypotheses",
+            "Four hypotheses for the MVP: media hints when AR fails, route inversion, route upload through the CRM, media content in AR."
+          ],
+          [
+            "User flows",
+            "Functional map, user flow and CRM logic."
+          ],
+          [
+            "Prototypes",
+            "Interactive prototypes in Figma and the visuals of the AR interface."
+          ],
+          [
+            "Testing",
+            "Two cycles: inside the team and at a station with real employees. Afterwards I refined the route screen, added fallback scenarios and AR status indicators."
+          ]
+        ],
+        "lead": "The solution was accepted as a pilot direction for rollout in several regions.",
+        "results": [
+          [
+            "Route preparation",
+            "Time cut by 40%."
+          ],
+          [
+            "Route completion",
+            "Time cut by 28%."
+          ],
+          ["User rating", "Grew from 3.8 to 4.5 out of 5."]
+        ]
+      }
+    },
+    "sibur": {
+      "title": "SIBUR — 3D Simulator",
+      "tags": [
+        "3D",
+        "B2B",
+        "Desktop"
+      ],
+      "case": {
+        "labels": {
+          "task": "Challenge",
+          "process": "Process",
+          "result": "Result"
+        },
+        "facts": [
+          [
+            "Role",
+            "Interaction structure, UX flow, interface simplicity"
+          ],
+          [
+            "Team",
+            "3D designer, Unity developer, product manager"
+          ]
+        ],
+        "task": "SIBUR had no digital training tools: engineers studied equipment from paper drawings and slide decks, and newcomers spent weeks understanding how systems work. We proposed a 3D simulator where you can examine equipment and see how it works.",
+        "process": [
+          [
+            "Session",
+            "Ran a session with training center instructors and engineers."
+          ],
+          [
+            "Problems",
+            "Outdated training format (drawings, PDFs, slides), low interest among young specialists, no way to visualize processes."
+          ],
+          [
+            "Hypotheses",
+            "Interactivity (3D models, cutaway views, animations) speeds up understanding of how equipment works, and a minimal interface lowers cognitive load even for newcomers. MVP goal: simplify training without complex UI."
+          ],
+          [
+            "User flows",
+            "Interaction structure and UX flow for three modes: standard, cutaway and animated."
+          ],
+          [
+            "Iterations",
+            "Several iterations with development to balance performance and visualization quality. The final prototype: minimal text, focus on action."
+          ]
+        ],
+        "lead": "The product was rolled out in the training system without extra instruction.",
+        "results": [
+          [
+            "Training time",
+            "Cut by 45%."
+          ],
+          [
+            "Learning errors",
+            "Down by 32%."
+          ],
+          ["User rating", "Grew from 3.9 to 4.6 out of 5."]
+        ]
+      }
+    },
+    "elemental": {
+      "title": "Elemental Towers — VR Game",
+      "tags": [
+        "VR",
+        "Game"
+      ],
+      "case": {
+        "labels": {
+          "task": "Challenge",
+          "process": "Process",
+          "result": "Result"
+        },
+        "facts": [
+          [
+            "Role",
+            "Product designer: menu and UX flow from game start to level selection"
+          ],
+          [
+            "Team",
+            "Game designer, VR developer, interface artist"
+          ]
+        ],
+        "task": "Elemental Towers is an in-house project by our team, which I joined as a product designer to improve the UX. A basic prototype already existed, but the team faced typical VR problems: fatigue, a confusing interface and low engagement during onboarding.",
+        "process": [
+          [
+            "Session analysis",
+            "Together with the team I analyzed the player session from start to level selection."
+          ],
+          [
+            "Findings",
+            "The HUD hangs in front of the eyes and tires players. Onboarding is long and text-based, so it gets skipped. Starting a level takes many steps, and players lose interest."
+          ],
+          [
+            "Hypotheses",
+            "A HUD on demand, contextual hints instead of text, a magic book with visual onboarding, biome selection through an interactive map."
+          ],
+          [
+            "Testing",
+            "Two iterations of alpha testing with metrics for time, errors and emotional response. After each, interaction scenarios were adjusted."
+          ],
+          [
+            "Rework",
+            "A flexible hint system, a gesture-controlled HUD and a “magic book” as a visual store of knowledge and mechanics."
+          ]
+        ],
+        "lead": "After the testing iterations the metrics improved significantly.",
+        "results": [
+          [
+            "Onboarding",
+            "Time cut by 2.5x."
+          ],
+          [
+            "Errors",
+            "Interaction errors down by 42%."
+          ],
+          [
+            "Engagement",
+            "Up by 27%."
+          ],
+          ["Interface rating", "4.8 out of 5."]
+        ]
+      }
+    },
+    "torweb": {
+      "title": "Tor — Website",
+      "tags": [
+        "Website",
+        "UX/UI",
+        "B2B"
+      ],
+      "case": {
+        "labels": {
+          "task": "Challenge",
+          "process": "Process",
+          "result": "Result"
+        },
+        "facts": [
+          [
+            "Role",
+            "Senior designer on the project: audit, structure, positioning, design and copy tasks, concept approval with the company director, testing"
+          ],
+          [
+            "Team",
+            "Layout designer, technical writer"
+          ],
+          [
+            "Timeline",
+            "2 months from audit to release, two language versions"
+          ],
+          [
+            "Tools",
+            "Tilda"
+          ]
+        ],
+        "task": "TOR is an IT company with 23 years in business, 8,000+ users and 1,500 clients across 9 countries. The product has three parts: the TOR ECM platform, industry modules for maritime logistics and standalone IT services. The old site did not reflect this structure: it was a set of pages accumulated over the years.",
+        "process": [
+          [
+            "Audit",
+            "Reviewed all 27 pages, many duplicated each other. Grouped the problems into three areas: prices and contacts, structure and positioning, visuals, copy and legal."
+          ],
+          [
+            "Problems",
+            "Minimum tariffs everywhere with no individual quote, outdated contacts, a form only on the contacts page. No concept of platform plus modules, support spread over 6 pages. Outdated design, copy not optimized for search, no policies or documents for the Ministry of Digital Development."
+          ],
+          [
+            "Competitor analysis",
+            "The main reference was Sedna, an AI shipping platform with clients like Glencore, Chevron and Exxon. Its logic (no prices, contact form only) fits long enterprise sales cycles. At TOR one person usually makes the decision, the cycle is shorter, and hidden pricing was one of the problems. We decided to build the site around the client’s task and show the price."
+          ],
+          [
+            "Role segmentation",
+            "The home page has six entry points: ship owners, container fleet operators, freight brokers, ship sale and purchase brokers, port agents, ship managers and operators. Each role gets its own set of modules with cross-links. Below it the TOR ECM platform, then the other services."
+          ],
+          [
+            "Calculator",
+            "Instead of static prices: the user picks a plan, enters the number of employees, gets a quote and can leave a request right away."
+          ],
+          [
+            "Structure",
+            "Merged six support pages into one and rebuilt the other sections the same way: from 27 to 19 pages with no loss of information."
+          ],
+          [
+            "Content",
+            "Instead of editing old texts I set up a full content review: the technical writer rewrote every block, and the English version was prepared separately."
+          ],
+          [
+            "Visuals and legal",
+            "The site moved to the color scheme of the system itself. Added privacy and cookie policies, form consents and documents for the Ministry of Digital Development."
+          ]
+        ],
+        "lead": "The site shrank from 27 to 19 pages, support from 6 pages to one, and it now complies with the law.",
+        "results": [
+          [
+            "Traffic",
+            "74% direct visits, 19% internal navigation, 5% from search (Yandex 64%, Google 35%)."
+          ],
+          [
+            "Requests",
+            "24 requests over the period, 1.2% conversion."
+          ],
+          [
+            "Sales",
+            "The sales team reports lead handling got simpler."
+          ]
+        ]
+      }
+    }
+  }
+};
+
+const modal = document.getElementById('projectModal');
+const closeBtn = document.getElementById('projectClose');
+const titleEl = document.getElementById('projectModalTitle');
+const bodyEl = document.getElementById('projectModalBody');
+
+function renderProjectModal(p){
+  const c = p.case;
+  if(!c) return '';
+  const facts = '<dl class="pm-facts">' + c.facts.map(f => `<dt>${f[0]}</dt><dd>${f[1]}</dd>`).join('') + '</dl>';
+  const task = `<div class="pm-section"><h4 class="pm-heading">${c.labels.task}</h4><p class="pm-task">${c.task}</p></div>`;
+  const steps = `<div class="pm-section"><h4 class="pm-heading">${c.labels.process}</h4><ol class="pm-steps">` +
+    c.process.map((s, i) => `<li><span class="pm-num">${String(i + 1).padStart(2, '0')}</span><div><b>${s[0]}</b><p>${s[1]}</p></div></li>`).join('') + '</ol></div>';
+  const results = `<div class="pm-section"><h4 class="pm-heading">${c.labels.result}</h4><p class="pm-lead">${c.lead}</p><div class="pm-results">` +
+    c.results.map(r => `<div><b>${r[0]}</b><p>${r[1]}</p></div>`).join('') + '</div></div>';
+  return facts + task + steps + results;
+}
+
+function openProjectModal(id){
+  const p = PROJECTS_I18N[currentLocale][id];
+  if(!p || !modal) return;
+  currentOpenProjectId = id;
+  titleEl.textContent = p.title;
+  const metaEl = document.getElementById('projectModalMeta');
+  if(metaEl) metaEl.textContent = p.tags.join(' · ');
+  bodyEl.innerHTML = renderProjectModal(p);
+  bodyEl.scrollTop = 0;
+  modal.hidden = false;
+  document.addEventListener('keydown', onModalKey);
+}
+function closeProjectModal(){
+  if(!modal) return;
+  modal.hidden = true;
+  currentOpenProjectId = null;
+  document.removeEventListener('keydown', onModalKey);
+}
+function onModalKey(e){
+  if(e.key === 'Escape') closeProjectModal();
+}
+
+if(modal){
+  document.querySelectorAll('[data-project]').forEach(el => {
+    el.addEventListener('click', () => openProjectModal(el.getAttribute('data-project')));
+  });
+  closeBtn.addEventListener('click', closeProjectModal);
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) closeProjectModal();
+  });
+}
+
+/* ---- Avatar: click to swap sticker photos; every new lap the head bursts into confetti ---- */
+(function(){
+  var btn=document.getElementById('avatarBtn'), img=document.getElementById('avatarImg');
+  if(!btn||!img) return;
+  var srcs=['avatar-1.webp','avatar-2.webp','avatar-3.webp','avatar-4.webp'];
+  srcs.forEach(function(u){ var p=new Image(); p.src=u; });
+  var i=0, busy=false;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var COLORS=['#ea4c89','#3d6bff','#ffd23f','#2ecc9a','#ff3b30','#8b5cf6','#ffffff','#ff9f1c'];
+
+  function confetti(){
+    var r=img.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height*0.42;
+    var dpr=Math.min(2,window.devicePixelRatio||1), W=window.innerWidth, H=window.innerHeight;
+    var cv=document.createElement('canvas'); cv.className='confetti-canvas';
+    cv.width=W*dpr; cv.height=H*dpr; cv.style.width=W+'px'; cv.style.height=H+'px';
+    document.body.appendChild(cv);
+    var ctx=cv.getContext('2d'); ctx.scale(dpr,dpr);
+    var P=[], N=90;
+    for(var n=0;n<N;n++){
+      var a=Math.random()*Math.PI*2, sp=260+Math.random()*620;
+      P.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-260,w:6+Math.random()*7,h:3+Math.random()*5,
+        rot:Math.random()*6.28,vr:(Math.random()-.5)*14,c:COLORS[n%COLORS.length],life:1.5+Math.random()*1.0,age:0,round:Math.random()<.3});
+    }
+    var last=performance.now();
+    function frame(now){
+      var dt=Math.min(.033,(now-last)/1000); last=now;
+      ctx.clearRect(0,0,W,H);
+      var alive=0;
+      for(var i2=0;i2<P.length;i2++){
+        var p=P[i2]; p.age+=dt; if(p.age>=p.life) continue; alive++;
+        var drag=Math.pow(.12,dt); p.vx*=drag; p.vy=p.vy*drag+1500*dt; p.x+=p.vx*dt; p.y+=p.vy*dt; p.rot+=p.vr*dt;
+        var fade=p.age>p.life*.7?1-(p.age-p.life*.7)/(p.life*.3):1;
+        ctx.globalAlpha=fade; ctx.fillStyle=p.c; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+        if(p.round){ ctx.beginPath(); ctx.arc(0,0,p.h*.7,0,6.283); ctx.fill(); } else { ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); }
+        ctx.restore();
+      }
+      if(alive) requestAnimationFrame(frame); else cv.remove();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function pop(dir){
+    img.animate([
+      {transform:'scale(.5) rotate('+(-dir*10)+'deg) translateY(14px)',opacity:0},
+      {transform:'scale(1.08) rotate('+(dir*3)+'deg)',opacity:1,offset:.6},
+      {transform:'scale(1) rotate(0)',opacity:1}
+    ],{duration:420,easing:'cubic-bezier(.2,.9,.3,1.2)'}).onfinish=function(){
+      img.getAnimations().forEach(function(a){a.cancel();}); busy=false;
+    };
+  }
+
+  btn.addEventListener('click',function(){
+    if(busy) return;
+    var wrap=(i===srcs.length-1);
+    i=(i+1)%srcs.length;
+    if(reduce||!img.animate){ img.src=srcs[i]; return; }
+    busy=true;
+    if(wrap){
+      confetti();
+      img.animate([
+        {transform:'scale(1)',opacity:1},
+        {transform:'scale(1.18)',opacity:1,offset:.45},
+        {transform:'scale(1.6)',opacity:0}
+      ],{duration:260,easing:'cubic-bezier(.3,0,.6,1)',fill:'forwards'}).onfinish=function(){
+        img.src=srcs[i];
+        img.animate([
+          {transform:'scale(.1)',opacity:0},
+          {transform:'scale(1.15)',opacity:1,offset:.65},
+          {transform:'scale(1)',opacity:1}
+        ],{duration:560,delay:120,easing:'cubic-bezier(.2,.9,.3,1.2)',fill:'backwards'}).onfinish=function(){
+          img.getAnimations().forEach(function(a){a.cancel();}); busy=false;
+        };
+      };
+      return;
+    }
+    var dir=(i%2?1:-1);
+    img.animate([
+      {transform:'scale(1) rotate(0)',opacity:1},
+      {transform:'scale(.6) rotate('+(dir*8)+'deg) translateY(8px)',opacity:0}
+    ],{duration:150,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'}).onfinish=function(){
+      img.src=srcs[i]; pop(dir);
+    };
+  });
+})();
+
+
+/* ---- Sidebar: fit to viewport height on desktop (no scroll) ---- */
+(function(){
+  var info=document.querySelector('.sidebar .info'), side=document.querySelector('.sidebar');
+  if(!info||!side) return;
+  function fit(){
+    info.style.transform='';
+    if(window.innerWidth<1024) return;
+    var cs=getComputedStyle(side);
+    var avail=window.innerHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+    var h=info.offsetHeight;
+    var k=h>avail?Math.max(.55,avail/h):1;
+    if(k<1) info.style.transform='scale('+k+')';
+  }
+  window.addEventListener('resize',fit); window.addEventListener('load',fit);
+  if(window.ResizeObserver) new ResizeObserver(fit).observe(info);
+  fit();
+})();
+
+/* ---- Memes: fly out of the folder onto the page, draggable ---- */
+(function(){
+  var folder=document.getElementById('memeOpen'), layer=document.getElementById('memeLayer');
+  if(!folder||!layer) return;
+  var cards=[].slice.call(layer.querySelectorAll('.meme-card')), opened=false, busy=false, z=1;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tilts=[-7,5,-4,8,-6,4,-5,6,-3], pos=[];
+
+  function layout(){
+    var W=window.innerWidth, H=window.innerHeight, desk=W>=1024, cols=(desk||cards.length>6)?3:2, STEP=.86;
+    var bottom=desk?H-112:H-106, right=desk?W-28:(W+0)/2, avail=bottom-16;
+    var w=Math.min(190,(desk?W*.45:W-32)/(1+(cols-1)*STEP)), rows, rowH;
+    for(var tries=0;tries<6;tries++){
+      rows=Math.ceil(cards.length/cols); rowH=[];
+      for(var r=0;r<rows;r++){ var m=0; for(var c=0;c<cols;c++){ var k=r*cols+c; if(k<cards.length) m=Math.max(m,w*parseFloat(cards[k].dataset.ar)); } rowH.push(m); }
+      var total=rowH.reduce(function(a,b){return a+b;},0)-(rows-1)*14;
+      if(total<=avail) break; w*=avail/total*.98;
+    }
+    var totalW=w+(cols-1)*w*STEP, left0=desk?right-totalW:(W-totalW)/2;
+    var y=bottom; pos=[];
+    for(var r2=0;r2<rows;r2++){
+      y-=rowH[r2]; 
+      for(var c2=0;c2<cols;c2++){
+        var kk=r2*cols+c2; if(kk>=cards.length) continue;
+        var h=w*parseFloat(cards[kk].dataset.ar), cc=desk?(cols-1-c2):c2;
+        pos[kk]={w:w,h:h,x:left0+cc*w*STEP+(Math.random()-.5)*10,y:y+(rowH[r2]-h)+(Math.random()-.5)*8,r:tilts[kk%tilts.length]};
+      }
+      y+=14;
+    }
+  }
+  function origin(){
+    var f=folder.querySelector('.ios-folder').getBoundingClientRect();
+    return {x:f.left+f.width/2,y:f.top+f.height/2};
+  }
+  function place(k){
+    var p=pos[k], c=cards[k];
+    c.style.width=p.w+'px'; c.style.translate=p.x+'px '+p.y+'px'; c.style.rotate=p.r+'deg';
+  }
+  function show(){
+    if(busy||opened) return; busy=true; opened=true;
+    layout(); layer.hidden=false; folder.classList.add('is-open');
+    var o=origin(), done=0;
+    cards.forEach(function(c,k){
+      place(k); c.style.zIndex=++z;
+      if(reduce||!c.animate){ done++; return; }
+      var p=pos[k], sx=o.x-p.w/2, sy=o.y-p.h/2;
+      c.animate([
+        {translate:sx+'px '+sy+'px',rotate:(tilts[k%tilts.length]*5)+'deg',scale:.12,opacity:0},
+        {translate:(p.x+(sx-p.x)*-.04)+'px '+(p.y-14)+'px',rotate:(p.r*1.4)+'deg',scale:1.06,opacity:1,offset:.72},
+        {translate:p.x+'px '+p.y+'px',rotate:p.r+'deg',scale:1,opacity:1}
+      ],{duration:760,delay:k*75,easing:'cubic-bezier(.2,.85,.3,1)',fill:'backwards'}).onfinish=function(){ if(++done===cards.length) busy=false; };
+    });
+    if(reduce) busy=false;
+  }
+  function hide(){
+    if(busy||!opened) return; busy=true; opened=false; folder.classList.remove('is-open');
+    var o=origin(), done=0;
+    function fin(){ if(++done===cards.length){ layer.hidden=true; busy=false; cards.forEach(function(c){c.getAnimations().forEach(function(a){a.cancel();}); }); } }
+    cards.forEach(function(c,k){
+      if(reduce||!c.animate){ fin(); return; }
+      var cs=c.style.translate.split(' '), x=parseFloat(cs[0]), y=parseFloat(cs[1]), p=pos[k]||{w:150,h:150};
+      c.animate([
+        {translate:x+'px '+y+'px',rotate:c.style.rotate,scale:1,opacity:1},
+        {translate:(o.x-p.w/2)+'px '+(o.y-p.h/2)+'px',rotate:(tilts[k%tilts.length]*5)+'deg',scale:.12,opacity:0}
+      ],{duration:420,delay:(cards.length-1-k)*45,easing:'cubic-bezier(.5,0,.8,.4)',fill:'forwards'}).onfinish=fin;
+    });
+  }
+  folder.addEventListener('click',function(e){ e.stopPropagation(); opened?hide():show(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') hide(); });
+  document.addEventListener('pointerdown',function(e){ if(opened&&!e.target.closest('.meme-card')&&!e.target.closest('#memeOpen')) hide(); });
+
+  cards.forEach(function(c){
+    var sx,sy,ox,oy,moved=false;
+    c.addEventListener('pointerdown',function(e){
+      e.preventDefault(); e.stopPropagation(); c.setPointerCapture(e.pointerId);
+      var t=c.style.translate.split(' '); ox=parseFloat(t[0]); oy=parseFloat(t[1]); sx=e.clientX; sy=e.clientY; moved=false;
+      c.style.zIndex=++z; c.classList.add('is-drag');
+    });
+    c.addEventListener('pointermove',function(e){
+      if(!c.classList.contains('is-drag')) return;
+      if(Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy)>3) moved=true;
+      c.style.translate=(ox+e.clientX-sx)+'px '+(oy+e.clientY-sy)+'px';
+    });
+    function up(){ c.classList.remove('is-drag'); }
+    c.addEventListener('pointerup',up); c.addEventListener('pointercancel',up);
+  });
+  window.addEventListener('resize',function(){ if(opened&&!busy){ layout(); cards.forEach(function(c,k){ place(k); }); } });
+})();
+</script>
+</body>
+</html>
