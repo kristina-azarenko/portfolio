@@ -8,12 +8,13 @@
 <meta id="pageDescription" name="description" content="UX/UI-дизайнер, специализируюсь на B2B и AR/VR-продуктах.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg: #111111;
   --fg: #FDFDFC;
   --muted: rgba(253,253,252,0.4);
+  --icon: #6f6f6e;
   --line: rgba(253,253,252,0.1);
   --bg-card: rgba(253,253,252,0.05);
   --bg-card-hover: rgba(253,253,252,0.09);
@@ -33,6 +34,7 @@ html[data-theme="light"]{
   --bg: #FDFDFC;
   --fg: #111111;
   --muted: rgba(17,17,17,0.4);
+  --icon: #9f9f9e;
   --line: rgba(17,17,17,0.1);
   --bg-card: rgba(17,17,17,0.04);
   --bg-card-hover: rgba(17,17,17,0.07);
@@ -219,9 +221,9 @@ a{ color:inherit; text-decoration:none; }
 .contact-row:hover{ background: var(--bg-card-hover); }
 .cv-btn:focus-visible,
 .contact-row:focus-visible{ outline: 2px solid var(--fg); outline-offset: -2px; }
-.row-icon{ flex-shrink: 0; color: var(--muted); }
+.row-icon{ flex-shrink: 0; color: var(--icon); }
 .row-text{ flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.row-arrow{ flex-shrink: 0; margin-left: auto; color: var(--muted); transition: transform .15s ease, color .15s ease; }
+.row-arrow{ flex-shrink: 0; margin-left: auto; color: var(--icon); transition: transform .15s ease, color .15s ease; }
 .cv-btn:hover .row-arrow,
 .contact-row:hover .row-arrow{ transform: translate(2px, -2px); color: var(--fg); }
 
@@ -230,6 +232,25 @@ a{ color:inherit; text-decoration:none; }
 .contact-row--tg .row-icon,
 .contact-row--tg .row-arrow{ color: rgba(255,255,255,0.92); }
 .contact-row--tg:hover .row-arrow{ color: #fff; }
+
+/* ---------------- CONTACT LINKS (simple inline row) ---------------- */
+:root{ --accent: #ea4c89; }
+html[data-theme="light"]{ --accent: #e0357a; }
+.contact-links{ display:flex; flex-wrap:wrap; align-items:center; gap: 10px 26px; padding: 0; }
+.contact-link{
+  display:inline-flex; align-items:center; gap: 8px;
+  padding: 4px 0; border: 0; background: none; cursor: pointer;
+  font: inherit; font-size: 16px; font-weight: 500; letter-spacing: -0.01em;
+  color: var(--fg); text-decoration: none; -webkit-tap-highlight-color: transparent;
+  transition: opacity .15s ease;
+}
+.contact-link:hover{ opacity: .6; }
+.contact-link:focus-visible{ outline: 2px solid var(--fg); outline-offset: 4px; border-radius: 4px; }
+.contact-link svg{ flex-shrink:0; color: var(--icon); }
+.contact-link .ci-check{ display:none; }
+.contact-link.is-copied .ci-copy{ display:none; }
+.contact-link.is-copied .ci-check{ display:block; animation: ciPop .35s cubic-bezier(.2,.9,.3,1.4); }
+@keyframes ciPop{ from{ transform: scale(.4); opacity:0; } to{ transform: scale(1); opacity:1; } }
 
 
 /* ---------------- CONCEPTS CARD ---------------- */
@@ -306,7 +327,7 @@ html[data-theme="light"] .concepts__link:hover{ background:#e8e8e4; }
 .concepts__dot{ width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .concepts__dot--dribbble{ background: #ea4c89; }
 .concepts__dot--pinterest{ background: #e60023; }
-.concepts__arrow{ margin-left: auto; flex-shrink: 0; color: var(--muted); transition: transform .15s ease, color .15s ease; }
+.concepts__arrow{ margin-left: auto; flex-shrink: 0; color: var(--icon); transition: transform .15s ease, color .15s ease; }
 .concepts__link:hover .concepts__arrow{ color: var(--fg); transform: translate(2px, -2px); }
 @media (hover: none){
   .concepts .concept-card--l{ rotate: -13deg; translate: -8px -10px; }
@@ -879,6 +900,162 @@ html[data-theme="light"]{ --folder-bg: rgba(60,60,67,.14); --folder-ring: rgba(0
   padding-top: 20px;
 }
 
+
+/* ======== LEFT COLUMN v2: clear hierarchy, one primary action, icon row ======== */
+:root{ --concept-bg: #161615; --concept-panel: #1f1f1e; }
+html[data-theme="light"]{ --concept-bg: #efefec; --concept-panel: #f7f7f5; }
+.info{ gap: 28px; }
+.info > .block:first-child{ gap: 8px; }
+.profile-row{ gap: 16px; }
+.name-line{ font-size: 30px; line-height: 1.1; letter-spacing: -0.03em; font-weight: 500; }
+.bio-text{ font-size: 16px; line-height: 1.4; }
+.bio-text + .bio-text{ font-size: 14px; line-height: 1.5; opacity: .55; margin-top: 2px; }
+
+.actions{ display:flex; flex-direction:column; gap: 12px; }
+.cv-btn{
+  min-height: 52px; padding: 0 18px; border-radius: 14px; gap: 12px;
+  background: var(--fg); color: var(--bg); font-size: 15px; font-weight: 500;
+  transition: opacity .15s ease, transform .15s ease;
+}
+.cv-btn:hover{ background: var(--fg); opacity: .88; }
+.cv-btn:active{ transform: scale(.985); }
+.cv-btn:focus-visible{ outline: 2px solid var(--fg); outline-offset: 3px; }
+.cv-btn .row-icon, .cv-btn .row-arrow{ color: var(--bg); }
+.cv-btn:hover .row-arrow{ color: var(--bg); }
+
+.icon-row{ display:flex; gap: 10px; }
+.icon-btn{
+  position: relative; width: 48px; height: 48px; border-radius: 50%; border: 0; padding: 0;
+  display: grid; place-items: center; cursor: pointer;
+  background: var(--bg-card); color: var(--fg);
+  -webkit-tap-highlight-color: transparent; transition: background .15s ease, transform .15s ease;
+}
+.icon-btn:hover{ background: var(--bg-card-hover); }
+.icon-btn:active{ transform: scale(.94); }
+.icon-btn:focus-visible{ outline: 2px solid var(--fg); outline-offset: 3px; }
+.icon-btn svg{ display:block; }
+.icon-btn .ib-check{ display:none; }
+.icon-btn.is-copied .ib-mail{ display:none; }
+.icon-btn.is-copied .ib-check{ display:block; }
+.icon-btn::after{
+  content: attr(data-tip); position: absolute; left: 0; top: calc(100% + 8px);
+  padding: 5px 10px; border-radius: 8px; background: var(--fg); color: var(--bg);
+  font-size: 12px; font-weight: 500; line-height: 1.3; white-space: nowrap;
+  opacity: 0; transform: translateY(-3px); pointer-events: none; z-index: 5;
+  transition: opacity .15s ease, transform .15s ease;
+}
+.icon-btn:focus-visible::after, .icon-btn.is-copied::after{ opacity: 1; transform: none; }
+@media (hover: hover){ .icon-btn:hover::after{ opacity: 1; transform: none; } }
+
+.concepts{ height: 210px; border-radius: 18px; }
+.concept-card{ top: 36px; }
+.concept-card--c{ top: 28px; }
+.concepts__panel{
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 0 18px; height: 52px; border-radius: 16px; transition: background .15s ease;
+}
+.concepts__title{ padding: 0; font-size: 15px; }
+.concepts__panel:hover{ background: var(--concept-panel); }
+.concepts__panel:hover .concepts__arrow{ color: var(--fg); transform: translate(2px,-2px); }
+.concepts__panel:focus-visible{ outline: 2px solid var(--fg); outline-offset: -3px; }
+
+/* ======== text contact links ======== */
+.text-links{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; padding: 4px 0 0; }
+.text-link{
+  display:inline-flex; align-items:center; gap: 8px; justify-self:start;
+  padding: 0; border: 0; background: none; cursor: pointer;
+  font: inherit; font-size: 16px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3;
+  color: var(--fg); text-decoration: none; -webkit-tap-highlight-color: transparent;
+  transition: opacity .15s ease;
+}
+.text-link:hover{ opacity: .6; }
+.text-link:focus-visible{ outline: 2px solid var(--fg); outline-offset: 4px; border-radius: 4px; }
+.text-link svg{ flex-shrink:0; color: var(--icon); }
+.text-link .tl-check{ display:none; }
+.text-link.is-copied .tl-arrow{ display:none; }
+.text-link.is-copied .tl-check{ display:block; }
+
+/* ======== contact links: compact row, soft grey ======== */
+:root{ --link-muted: #9f9f9e; }
+html[data-theme="light"]{ --link-muted: #6f6f6e; }
+.text-links{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; padding: 2px 0 0; }
+.text-link{ font-size: 14px; font-weight: 400; color: var(--link-muted); transition: color .15s ease; }
+.text-link:hover{ color: var(--fg); opacity: 1; }
+.text-link svg{ width: 14px; height: 14px; color: currentColor; }
+
+/* ======== LEFT COLUMN v3: two anchored groups (top identity / bottom actions) ======== */
+.info-top, .info-bottom{ display:flex; flex-direction:column; }
+.info-top{ gap: 0; }
+.info-top > .block{ gap: 8px; }
+.info-bottom{ gap: 16px; }
+@media (min-width:1024px){
+  .sidebar .info{ min-height: calc(100vh - 56px); justify-content: space-between; gap: 28px; }
+}
+.name-line{ font-size: 32px; font-weight: 600; line-height: 1.06; letter-spacing: -0.035em; width: min-content; }
+.bio-text{ color: var(--link-muted); }
+.bio-text + .bio-text{ opacity: 1; margin-top: 0; }
+.actions{ gap: 22px; }
+.cv-btn{ min-height: 0; padding: 13px 16px; border-radius: 12px; }
+.text-links{ gap: 8px 16px; padding: 0; }
+.text-link{ font-size: 15px; }
+.concepts{ height: 188px; }
+.concept-card{ top: 30px; }
+.concept-card--c{ top: 22px; }
+
+/* ======== LEFT COLUMN v4: 8-pt rhythm, 3 text levels, grouped by proximity ======== */
+@media (min-width:1024px){
+  .sidebar .info{ min-height: 0; justify-content: flex-start; gap: 32px; }
+}
+.info-top > .block{ gap: 8px; }
+.info-bottom{ gap: 32px; }
+.info-bottom .actions{ order: -1; }
+.actions{ gap: 16px; }
+.name-line{ font-size: 28px; font-weight: 600; line-height: 1.15; letter-spacing: -0.03em; width: auto; }
+.bio-text{ font-size: 16px; line-height: 1.4; color: var(--fg); }
+.bio-text + .bio-text{ font-size: 14px; line-height: 1.5; color: var(--link-muted); margin-top: -4px; }
+.text-link{ font-size: 14px; }
+.text-links{ gap: 8px 16px; }
+.concepts{ height: 192px; }
+
+/* ======== socials without arrows, LinkedIn placeholder, concepts with links ======== */
+.text-links{ display:flex; flex-wrap:wrap; gap: 8px 24px; }
+.text-link--soon{ cursor: default; }
+.text-link--soon:hover{ color: var(--link-muted); }
+.concepts{ height: 250px; }
+.concept-card{ top: 34px; }
+.concept-card--c{ top: 26px; }
+.concepts__panel{ display: block; height: auto; padding: 0; border-radius: 18px; }
+.concepts__title{ padding: 20px 20px 18px; font-size: 17px; }
+.concepts__panel:hover{ background: var(--concept-panel); }
+
+/* ======== spacing system: 4 / 8 inside text, 16 inside a group, 32 between groups, 48 between sections ======== */
+.info-top > .block{ gap: 4px; }
+.bio-text + .bio-text{ margin-top: 4px; }
+.profile-row{ gap: 16px; }
+.actions{ gap: 16px; }
+@media (min-width:1024px){ .sidebar .info{ gap: 32px; } }
+.info-bottom{ gap: 48px; }
+.info-bottom > .block{ gap: 0; }
+
+/* ======== LEFT COLUMN v5: about + CV (top) / concepts / contacts pinned to bottom ======== */
+.info{ gap: 0; }
+.info-top{ gap: 24px; }
+.info-mid{ margin-top: 48px; }
+.info-contacts{ margin-top: 32px; }
+.info-contacts .text-links{ padding: 0; }
+@media (min-width:1024px){
+  .sidebar .info{ min-height: calc(100vh - 56px); justify-content: flex-start; gap: 0; }
+  .info-contacts{ margin-top: auto; padding-top: 32px; }
+}
+
+/* ======== avatar: align visible photo to the text edge; mobile order ======== */
+.avatar img{ object-position: left bottom; }
+@media (max-width:1023px){
+  .info-contacts{ order: 1; margin-top: 16px; padding-top: 0; }
+  .info-mid{ order: 2; margin-top: 48px; }
+}
+
+.avatar{ margin-left: -16px; }
 </style>
 </head>
 <body>
@@ -893,42 +1070,27 @@ html[data-theme="light"]{ --folder-bg: rgba(60,60,67,.14); --folder-ring: rgba(0
     </div>
 
     <div class="info">
+      <div class="info-top">
       <div class="block">
         <div class="profile-row">
           <button type="button" class="avatar" id="avatarBtn" aria-label="Сменить фото">
-            <img id="avatarImg" src="avatar-1.webp" alt="Кристина Азаренко" width="340" height="360" draggable="false">
+            <img id="avatarImg" src="avatar-1.png" alt="Кристина Азаренко" width="340" height="360" draggable="false">
           </button>
           <div class="name-line" data-i18n="name">Кристина Азаренко</div>
         </div>
         <p class="bio-text" data-i18n="bio1">UX/UI-дизайнер, 4 года опыта</p>
         <p class="bio-text" data-i18n="bio2">B2B: мобильные, веб и десктопные приложения, AR/VR и сложные интерфейсы.</p>
       </div>
-
-      <a class="cv-btn" href="Kristina_Azarenko_CV.pdf" target="_blank" rel="noopener">
-        <svg class="row-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/><path d="M9 9h1"/><path d="M9 13h6"/><path d="M9 17h6"/></svg>
+        <a class="cv-btn" href="Kristina_Azarenko_CV.pdf" target="_blank" rel="noopener">
         <span class="row-text" data-i18n="cvButton">Смотреть резюме</span>
-        <svg class="row-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg>
+        <svg class="row-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7l-10 10M8 7l9 0l0 9"/></svg>
       </a>
-
-      <div class="block">
-        <p class="label" data-i18n="contactsLabel">Контакты</p>
-        <div class="contact-list">
-          <a class="contact-row" id="emailRow" data-email="krissazarenko@yandex.ru" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=krissazarenko@yandex.ru" target="_blank" rel="noopener">
-            <svg class="row-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"/><path d="M3 7l9 6l9 -6"/></svg>
-            <span class="row-text" aria-live="polite">krissazarenko@yandex.ru</span>
-          </a>
-          <a class="contact-row contact-row--tg" href="https://t.me/gotikamil" target="_blank" rel="noopener">
-            <svg class="row-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 10-4 4 6 6 4-16-18 7 4 2 2 6 3-4"/></svg>
-            <span class="row-text" data-i18n="contactTelegram">Написать в Telegram</span>
-          </a>
-
-        </div>
       </div>
 
-
+      <div class="info-mid">
       <div class="block">
         <div class="concepts">
-          <a class="concepts__stage" href="https://ru.pinterest.com/krissazarenko/" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <a class="concepts__stage" href="https://dribbble.com/AzarenkoKristina" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
             <span class="concept-card concept-card--l"><img src="concept-1.webp" alt="" width="320" height="470" loading="lazy"></span>
             <span class="concept-card concept-card--c"><img src="concept-2.webp" alt="" width="320" height="470" loading="lazy"></span>
             <span class="concept-card concept-card--r"><img src="concept-3.webp" alt="" width="320" height="470" loading="lazy"></span>
@@ -936,10 +1098,19 @@ html[data-theme="light"]{ --folder-bg: rgba(60,60,67,.14); --folder-ring: rgba(0
           <div class="concepts__panel">
             <div class="concepts__title" data-i18n="conceptsTitle">Мои концепты</div>
             <div class="concepts__links">
-              <a class="concepts__link" href="https://dribbble.com/AzarenkoKristina" target="_blank" rel="noopener"><span class="concepts__dot concepts__dot--dribbble"></span>Dribbble <svg class="concepts__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg></a>
-              <a class="concepts__link" href="https://ru.pinterest.com/krissazarenko/" target="_blank" rel="noopener"><span class="concepts__dot concepts__dot--pinterest"></span>Pinterest <svg class="concepts__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7l-10 10"/><path d="M8 7l9 0l0 9"/></svg></a>
+              <a class="concepts__link" href="https://dribbble.com/AzarenkoKristina" target="_blank" rel="noopener"><span class="concepts__dot concepts__dot--dribbble"></span>Dribbble <svg class="concepts__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7l-10 10M8 7l9 0l0 9"/></svg></a>
+              <a class="concepts__link" href="https://ru.pinterest.com/krissazarenko/" target="_blank" rel="noopener"><span class="concepts__dot concepts__dot--pinterest"></span>Pinterest <svg class="concepts__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7l-10 10M8 7l9 0l0 9"/></svg></a>
             </div>
           </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="info-contacts">
+        <div class="text-links">
+          <a class="text-link" href="mailto:krissazarenko@yandex.ru"><span class="tl-text">Mail</span></a>
+          <a class="text-link" href="https://t.me/gotikamil" target="_blank" rel="noopener"><span class="tl-text">Telegram</span></a>
+          <a class="text-link" href="https://www.linkedin.com/in/kristina-azarenko-83780b347/" target="_blank" rel="noopener"><span class="tl-text">LinkedIn</span></a>
         </div>
       </div>
     </div>
@@ -1129,7 +1300,6 @@ html[data-theme="light"]{ --folder-bg: rgba(60,60,67,.14); --folder-ring: rgba(0
     <img src="meme-1.webp" alt=""><img src="meme-2.webp" alt=""><img src="meme-3.webp" alt="">
     <img src="meme-4.webp" alt=""><img src="meme-5.webp" alt=""><img src="meme-6.webp" alt="">
     <img src="meme-7.webp" alt=""><img src="meme-8.webp" alt=""><img src="meme-9.webp" alt="">
-    <span class="ios-folder__badge">9</span>
   </span>
   <span class="ios-folder__label" data-i18n="memeFolder">Мемы</span>
 </button>
@@ -1176,7 +1346,9 @@ const TRANSLATIONS = {
     conceptsTitle: 'Мои концепты',
     casesHeading: 'Кейсы',
     contactTelegram: 'Написать в Telegram',
-    emailCopied: 'Адрес скопирован',
+    contactEmail: 'Email',
+    contactTelegramShort: 'Telegram',
+    emailCopied: 'Скопировано',
     contactsLabel: 'Контакты',
     expHeading: 'Опыт',
     expBadgeCurrent: 'Работаю',
@@ -1213,7 +1385,9 @@ const TRANSLATIONS = {
     conceptsTitle: 'My concepts',
     casesHeading: 'Cases',
     contactTelegram: 'Message on Telegram',
-    emailCopied: 'Email copied',
+    contactEmail: 'Email',
+    contactTelegramShort: 'Telegram',
+    emailCopied: 'Copied',
     contactsLabel: 'Contact',
     expHeading: 'Experience',
     expBadgeCurrent: 'Working here',
@@ -2083,7 +2257,7 @@ if(modal){
 (function(){
   var btn=document.getElementById('avatarBtn'), img=document.getElementById('avatarImg');
   if(!btn||!img) return;
-  var srcs=['avatar-1.webp','avatar-2.webp','avatar-3.webp','avatar-4.webp'];
+  var srcs=['avatar-1.png','avatar-2.png','avatar-3.png','avatar-4.png','avatar-5.png'];
   srcs.forEach(function(u){ var p=new Image(); p.src=u; });
   var i=0, busy=false;
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2165,6 +2339,20 @@ if(modal){
 })();
 
 
+/* ---- Avatar: shift the photo so its visible edge sits on the text edge (originals stay untouched) ---- */
+(function(){
+  var img=document.getElementById('avatarImg'); if(!img) return;
+  var L={'713x843':.1501,'762x771':.1207,'727x786':.0468,'740x772':.0473,'773x761':.0336};
+  function align(){
+    var nw=img.naturalWidth, nh=img.naturalHeight; if(!nw) return;
+    var f=L[nw+'x'+nh]||0, W=img.clientWidth, H=img.clientHeight;
+    var rw=Math.min(W,H*nw/nh);
+    img.style.marginLeft=(-f*rw)+'px';
+  }
+  img.addEventListener('load',align); window.addEventListener('resize',align); window.addEventListener('load',align);
+  if(img.complete) align();
+})();
+
 /* ---- Sidebar: fit to viewport height on desktop (no scroll) ---- */
 (function(){
   var info=document.querySelector('.sidebar .info'), side=document.querySelector('.sidebar');
@@ -2174,7 +2362,7 @@ if(modal){
     if(window.innerWidth<1024) return;
     var cs=getComputedStyle(side);
     var avail=window.innerHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
-    var h=info.offsetHeight;
+    var h=48+32; [].forEach.call(info.children,function(k){ h+=k.offsetHeight; });
     var k=h>avail?Math.max(.55,avail/h):1;
     if(k<1) info.style.transform='scale('+k+')';
   }
